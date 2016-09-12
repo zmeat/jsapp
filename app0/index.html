@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>首页</title>
+    <link rel="stylesheet" type="text/css" href="./css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+    <link rel="stylesheet" href="./css/aui.2.0.css">
+    <link rel="stylesheet" href="../css/zmeat.css">
+    <style>
+        #footer{  background-color: #fff; box-shadow: 0px 0.1px 0.1px #f2f2f2 inset }
+        #footer ul li{  padding-top:28px; padding-bottom: 4px; background: url() no-repeat center 2px; background-size: auto 27px; text-align: center; font-size: 14px; font-family: "微软雅黑";color: #a9b7b7;}
+        #footer ul li.active{ color: #f4c600; }
+        #footer ul li:nth-child(1){ background-image: url(./image/gd0102.png); }
+        #footer ul li:nth-child(2){ background-image: url(./image/cg0102.png); }
+        #footer ul li:nth-child(3){ background-image: url(./image/ck0102.png); }
+        #footer ul li:nth-child(1).active{ background-image: url(./image/gd0101.png); }
+        #footer ul li:nth-child(2).active{ background-image: url(./image/cg0101.png); }
+        #footer ul li:nth-child(3).active{ background-image: url(./image/ck0101.png); }
+
+    </style>
+</head>
+<body>
+<div id="wrap" class="flex-wrap flex-vertical">
+    <header class="aui-bar aui-bar-nav" style="background: #ffc107">
+        <a class="aui-pull-left aui-btn">
+            <span class="aui-iconfont aui-icon-search"></span>
+        </a>
+        <div class="aui-title"></div>
+        <a class="aui-pull-right aui-btn" onclick="openWin('login', './html/login.html')">
+            <span class="aui-iconfont aui-icon-my"></span>
+        </a>
+    </header>
+    <div id="main" class="flex-con">
+
+    </div>
+    <div id="footer" class="border-t">
+        <ul class="flex-wrap" >
+            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con active" >工单</li>
+            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >采购</li>
+            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >仓库</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="script/api.js"></script>
+<script type="text/javascript">
+    apiready = function () {
+        $api.fixStatusBar( $api.dom('header') );
+        api.setStatusBarStyle({
+            style: 'dark',
+            color: "#33475f"
+        });
+
+        funIniGroup();
+    }
+
+    function openWin(name, url){
+        api.openWin({
+            name: name,
+            url: url
+        });
+    }
+
+    function funIniGroup(){
+        var footerLis = $api.domAll('#footer li'),
+            frames = [];
+        for (var i = 0,len = footerLis.length; i < len; i++) {
+                frames.push( { 
+                    name: 'frame'+i, 
+                    url: './html/frame'+i+'.html', 
+                    bgColor : 'rgba(0,0,0,.2)',
+                    bounces:true
+                } )
+        }
+        api.openFrameGroup({
+            name: 'group',
+            scrollEnabled: false,
+            rect: {
+                x: 0, 
+                y: $api.dom('header').offsetHeight, 
+                w: api.winWidth, 
+                h: $api.dom('#main').offsetHeight
+            },
+            index: 0,
+            frames: frames
+        }, function (ret, err) {
+
+        });
+    }
+
+    // 随意切换按钮
+    function randomSwitchBtn( tag ) {
+        if( tag == $api.dom('#footer li.active') )return;
+        var eFootLis = $api.domAll('#footer li'),
+            eHeaderLis = $api.domAll('header li'),
+            index = 0;
+        for (var i = 0,len = eFootLis.length; i < len; i++) {
+            if( tag == eFootLis[i] ){
+                index = i;
+            }else{
+                $api.removeCls(eFootLis[i], 'active');
+                $api.removeCls(eHeaderLis[i], 'active');
+            }
+        }
+        $api.addCls( eFootLis[index], 'active');
+        $api.addCls( eHeaderLis[index], 'active');
+        api.setFrameGroupIndex({
+            name: 'group',
+            index: index
+        });
+    }
+</script>
