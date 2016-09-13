@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
-    <title>云API</title>
+    <title>主页面</title>
     <link rel="stylesheet" type="text/css" href="../css/api.css"/>
     <link rel="stylesheet" type="text/css" href="../css/style.css"/>
     <link rel="stylesheet" href="../css/aui.2.0.css">
@@ -77,7 +77,7 @@
 
     <section class="aui-grid aui-margin-b-15">
         <div class="aui-row">
-            <div class="aui-col-xs-4">
+            <div class="aui-col-xs-4" tapmode onclick="openWin('latest_addtion-2', './latest_addtion-2.html')">
                 <i class="zmeat-iconfont zmeat-icon-11"></i>
                 <div class="aui-grid-label">新增货品</div>
             </div>
@@ -85,7 +85,7 @@
                 <i class="zmeat-iconfont zmeat-icon-5"></i>
                 <div class="aui-grid-label">货品管理</div>
             </div>
-            <div class="aui-col-xs-4" onclick="openWin('latest_addtion', './latest_addtion.html')">
+            <div class="aui-col-xs-4" tapmode onclick="openWin('latest_addtion', './latest_addtion.html')">
                 <i class="zmeat-iconfont zmeat-icon-7"></i>
                 <div class="aui-grid-label">新增入库</div>
             </div>
@@ -118,6 +118,8 @@
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/zepto.min.js"></script>
 <script type="text/javascript" src="../script/touch.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+
 <script type="text/javascript">
     apiready = function(){
         $('.select_pull').tap(function(){
@@ -135,12 +137,6 @@
             });
         });
 
-       function openWin(name, url){
-        api.openWin({
-            name: name,
-            url: url
-            });
-        }   
     };
 </script>
 </body>

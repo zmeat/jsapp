@@ -21,101 +21,107 @@
     </style>
 </head>
 <body>
-<div class="aui-content aui-margin-b-15">
-    <ul class="aui-list aui-list-in">
-        <li class="aui-list-header" style="background-color: #ffc107;">
-            <p>货品添加</p>
-            <a onclick="openWin('frame0', './frame0.html')">
-            <img src="../image/left_row.png" alt="" style='position:absolute; left:0; top:0; width:40px; height:40px;'>
-            </a>
-        </li>
-       
-        
-        <li class="aui-list-item">
-            <div class="aui-searchbar" id="search">
-                <div class="aui-searchbar-input aui-border-radius" tapmode onclick="doSearch()">
-                    <i class="aui-iconfont aui-icon-search"></i>
-                    <form action="javascript:search();">
-                        <input type="search" placeholder="请输入搜索内容" id="search-input">
-                    </form>
+    <header class="aui-bar aui-bar-nav" style="background: #ffc107">
+        <a class="aui-pull-left aui-btn"  tapmode onclick="closeWin('latest_addtion-2')">
+            <span class="aui-iconfont aui-icon-left" ></span>
+        </a>
+        <div class="aui-title">货品添加</div>
+        <a class="aui-pull-right aui-btn">
+            <span class="aui-iconfont"></span>
+        </a>
+    </header>
+    <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-list-in">
+            <li class="aui-list-item">
+                <div class="aui-searchbar" id="search">
+                    <div class="aui-searchbar-input aui-border-radius" tapmode onclick="openSearch()">
+                        <i class="aui-iconfont aui-icon-search"></i>
+                        <form action="javascript:search();">
+                            <input type="search" placeholder="请输入搜索内容" id="search-input">
+                        </form>
+                    </div>
+                    <div class="aui-searchbar-cancel" tapmod>取消</div>
                 </div>
-                <div class="aui-searchbar-cancel" tapmod>取消</div>
-            </div>
-        </li>
+            </li>
+                
+            <li class="aui-list-item" style="margin-top:1px;">
+                <div class="aui-list-item-inner" >
+                    <div class="aui-list-item-title">
+                        <p class="goods-title">吉米娃娃</p>
+    	                <ul class="goods-details">
+    		                <li>货品编号:<span>1223</span></li>
+    		                <li>货品型号：<span>dfkjdsfh</span></li>
+    		                <li>货品总库存：<span>99</span></li>
+    	                </ul>
+                    </div>
+                    <div class="aui-list-item-right">
+                        <img class="goods-addtion" src="../image/addtion-bottom.png" alt="添加" >
+                    </div>
+                </div>
+            </li>
             
-        <li class="aui-list-item" style="margin-top:1px;">
-            <div class="aui-list-item-inner" >
-                <div class="aui-list-item-title">
-                    <p class="goods-title">吉米娃娃</p>
-	                <ul class="goods-details">
-		                <li>货品编号:<span>1223</span></li>
-		                <li>货品型号：<span>dfkjdsfh</span></li>
-		                <li>货品总库存：<span>99</span></li>
-	                </ul>
+            <li class="aui-list-item" style="margin-top:1px;">
+                <div class="aui-list-item-inner" >
+                    <div class="aui-list-item-title">
+                        <p class="goods-title">吉米娃娃</p>
+    	                <ul class="goods-details">
+    		                <li>货品编号:<span>1223</span></li>
+    		                <li>货品型号：<span>dfkjdsfh</span></li>
+    		                <li>货品总库存：<span>99</span></li>
+    	                </ul>
+                    </div>
+                    <div class="aui-list-item-right">
+                        <img class="goods-addtion" src="../image/addtion-bottom.png" alt="添加" >
+                    </div>
                 </div>
-                <div class="aui-list-item-right">
-                    <img class="goods-addtion" src="../image/addtion-bottom.png" alt="添加" >
-                </div>
-            </div>
-        </li>
-        
-        <li class="aui-list-item" style="margin-top:1px;">
-            <div class="aui-list-item-inner" >
-                <div class="aui-list-item-title">
-                    <p class="goods-title">吉米娃娃</p>
-	                <ul class="goods-details">
-		                <li>货品编号:<span>1223</span></li>
-		                <li>货品型号：<span>dfkjdsfh</span></li>
-		                <li>货品总库存：<span>99</span></li>
-	                </ul>
-                </div>
-                <div class="aui-list-item-right">
-                    <img class="goods-addtion" src="../image/addtion-bottom.png" alt="添加" >
-                </div>
-            </div>
-        </li>
+            </li>
 
-        <li class="aui-list-item" style="margin-top:1px;">
-            <div class="aui-list-item-inner" >
-                <div class="aui-list-item-title">
-                    <p class="goods-title">吉米娃娃</p>
-	                <ul class="goods-details">
-		                <li>货品编号:<span>1223</span></li>
-		                <li>货品型号：<span>dfkjdsfh</span></li>
-		                <li>货品总库存：<span>99</span></li>
-	                </ul>
+            <li class="aui-list-item" style="margin-top:1px;">
+                <div class="aui-list-item-inner" >
+                    <div class="aui-list-item-title">
+                        <p class="goods-title">吉米娃娃</p>
+    	                <ul class="goods-details">
+    		                <li>货品编号:<span>1223</span></li>
+    		                <li>货品型号：<span>dfkjdsfh</span></li>
+    		                <li>货品总库存：<span>99</span></li>
+    	                </ul>
+                    </div>
+                    <div class="aui-list-item-right">
+                        <img class="goods-addtion" src="../image/addtion-bottom.png" alt="添加" >
+                    </div>
                 </div>
-                <div class="aui-list-item-right">
-                    <img class="goods-addtion" src="../image/addtion-bottom.png" alt="添加" >
-                </div>
-            </div>
-        </li>
+            </li>
 
-        <li class="aui-list-item" style="margin-top:1px;">
-            <div class="aui-list-item-inner" >
-                <div class="aui-list-item-title">
-                    <p class="goods-title">吉米娃娃</p>
-	                <ul class="goods-details">
-		                <li>货品编号:<span>1223</span></li>
-		                <li>货品型号：<span>dfkjdsfh</span></li>
-		                <li>货品总库存：<span>99</span></li>
-	                </ul>
+            <li class="aui-list-item" style="margin-top:1px;">
+                <div class="aui-list-item-inner" >
+                    <div class="aui-list-item-title">
+                        <p class="goods-title">吉米娃娃</p>
+    	                <ul class="goods-details">
+    		                <li>货品编号:<span>1223</span></li>
+    		                <li>货品型号：<span>dfkjdsfh</span></li>
+    		                <li>货品总库存：<span>99</span></li>
+    	                </ul>
+                    </div>
+                    <div class="aui-list-item-right">
+                        <img class="goods-addtion" src="../image/addtion-bottom.png" alt="添加" >
+                    </div>
                 </div>
-                <div class="aui-list-item-right">
-                    <img class="goods-addtion" src="../image/addtion-bottom.png" alt="添加" >
-                </div>
-            </div>
-        </li>
+            </li>
 
-    </ul>
-</div> 
+        </ul>
+    </div> 
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/zepto.min.js"></script>
 <script type="text/javascript" src="../script/touch.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
 <script type="text/javascript">
-    apiready = function(){
-       
-    };
+apiready = function(){
+    $api.fixStatusBar( $api.dom('header') );
+    api.setStatusBarStyle({
+        style: 'dark',
+        color: "#33475f"
+    });       
+};
 </script>
 </html>

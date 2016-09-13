@@ -24,7 +24,7 @@
 <body>
 <div id="wrap" class="flex-wrap flex-vertical">
     <header class="aui-bar aui-bar-nav" style="background: #ffc107">
-        <a class="aui-pull-left aui-btn">
+        <a class="aui-pull-left aui-btn" tapmode onclick="openSearch()">
             <span class="aui-iconfont aui-icon-search"></span>
         </a>
         <div class="aui-title"></div>
@@ -37,44 +37,32 @@
     </div>
     <div id="footer" class="border-t">
         <ul class="flex-wrap" >
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con active" >工单</li>
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >采购</li>
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >仓库</li>
+            <li tapmode="hover" tapmode onclick="randomSwitchBtn( this );" class="flex-con active" >工单</li>
+            <li tapmode="hover" tapmode onclick="randomSwitchBtn( this );" class="flex-con" >采购</li>
+            <li tapmode="hover" tapmode onclick="randomSwitchBtn( this );" class="flex-con" >设置</li>
         </ul>
     </div>
 </div>
 </body>
 </html>
-<script type="text/javascript" src="script/api.js"></script>
+<script type="text/javascript" src="./script/api.js"></script>
+<script type="text/javascript" src="./script/zepto.min.js"></script>
+<script type="text/javascript" src="./script/touch.js"></script>
+<script type="text/javascript" src="./script/common.js"></script>
 <script type="text/javascript">
-    apiready = function () {
-        $api.fixStatusBar( $api.dom('header') );
-        api.setStatusBarStyle({
-            style: 'dark',
-            color: "#33475f"
-        });
+apiready = function () {
+    $api.fixStatusBar( $api.dom('header') );
+    api.setStatusBarStyle({
+        style: 'dark',
+        color: "#33475f"
+    });   
 
-        funIniGroup();
-    }
-
-    function openWin(name, url){
-        api.openWin({
-            name: name,
-            url: url
-        });
-    }
+    funIniGroup();
+}
 
     function funIniGroup(){
-        var footerLis = $api.domAll('#footer li'),
-            frames = [];
-        for (var i = 0,len = footerLis.length; i < len; i++) {
-                frames.push( { 
-                    name: 'frame'+i, 
-                    url: './html/frame'+i+'.html', 
-                    bgColor : 'rgba(0,0,0,.2)',
-                    bounces:true
-                } )
-        }
+        var footerLis = $api.domAll('#footer li');
+
         api.openFrameGroup({
             name: 'group',
             scrollEnabled: false,
@@ -85,7 +73,24 @@
                 h: $api.dom('#main').offsetHeight
             },
             index: 0,
-            frames: frames
+            frames: [{ 
+                    name: 'main', 
+                    url: './html/main.html', 
+                    bgColor : 'rgba(0,0,0,.2)',
+                    bounces:false
+                },
+                { 
+                    name: 'buy', 
+                    url: './html/buy.html', 
+                    bgColor : 'rgba(0,0,0,.2)',
+                    bounces:false
+                },
+                { 
+                    name: 'setting', 
+                    url: './html/setting.html', 
+                    bgColor : 'rgba(0,0,0,.2)',
+                    bounces:false
+                }]
         }, function (ret, err) {
 
         });
@@ -112,4 +117,5 @@
             index: index
         });
     }
+
 </script>
