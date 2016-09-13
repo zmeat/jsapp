@@ -14,7 +14,7 @@
         }
         .aui-grid [class*=aui-col-] { border: solid .05rem #f5f5f5; }
 
-        .select_box {
+        /* .select_box {
             display: block;
             width: 100%;
             height: 45px;
@@ -34,8 +34,8 @@
             line-height: 2.3;
             font-family: "微软雅黑";
             font-size: 18px;
-        }
-        .data_box {
+        } */
+        /* .data_box {
             width: 100%;
             background: #fff;
             margin-bottom: 12px;
@@ -48,7 +48,7 @@
         }
         .data_box table td {
             height: 35px;
-        }
+        } */
         .select_pull {
             background: url('../image/jiaobiao.png') no-repeat;
             background-size: 16px;
@@ -61,7 +61,7 @@
     </style>
 </head>
 <body>
-    <div class="select_box"><span class="select_pull">所有仓库</span></div>
+    <!-- <div class="select_box"><span class="select_pull">所有仓库</span></div>
     <div class="data_box">
         <table>
             <tr>
@@ -73,7 +73,7 @@
                 <td><span class="first">库存过多：</span><span class="second">0</span></td>
             </tr>
         </table>
-    </div>
+    </div> -->
 
     <section class="aui-grid aui-margin-b-15">
         <div class="aui-row">
@@ -85,7 +85,7 @@
                 <i class="zmeat-iconfont zmeat-icon-5"></i>
                 <div class="aui-grid-label">货品管理</div>
             </div>
-            <div class="aui-col-xs-4">
+            <div class="aui-col-xs-4" onclick="openWin('latest_addtion', './latest_addtion.html')">
                 <i class="zmeat-iconfont zmeat-icon-7"></i>
                 <div class="aui-grid-label">新增入库</div>
             </div>
@@ -134,6 +134,13 @@
                 }
             });
         });
+
+       function openWin(name, url){
+        api.openWin({
+            name: name,
+            url: url
+            });
+        }   
     };
 </script>
 </body>
