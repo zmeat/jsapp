@@ -88,7 +88,7 @@
             </ul>
         </div>
         <div class="button_box">
-            <button class="aui-btn aui-btn-warning aui-btn-block btn-height">登录</button>
+            <button class="aui-btn aui-btn-warning aui-btn-block btn-height" tapmode onclick="login()">登录</button>
             <button class="aui-btn aui-btn-light aui-btn-block btn-height" style="background:#fff; border: .05rem solid #f4c600;" onclick="openWin('register', './register.html')">注册</button>
         </div>
     </div>
@@ -104,7 +104,21 @@ apiready = function(){
     api.setStatusBarStyle({
         style: 'dark',
         color: "#33475f"
-    });   
+    });
+
+
+    //监听返回键
+    api.addEventListener({
+        name: 'keyback'
+    }, function(ret, err){
+        return false;
+    }); 
 };
+
+function login(){
+    $api.setStorage('token', {uid: '1', username: 'zjw'});
+
+    openWin('root', '../index.html');
+}
 </script>
 </html>

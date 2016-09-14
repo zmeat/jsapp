@@ -46,8 +46,6 @@
 </body>
 </html>
 <script type="text/javascript" src="./script/api.js"></script>
-<script type="text/javascript" src="./script/zepto.min.js"></script>
-<script type="text/javascript" src="./script/touch.js"></script>
 <script type="text/javascript" src="./script/common.js"></script>
 <script type="text/javascript">
 apiready = function () {
@@ -55,67 +53,79 @@ apiready = function () {
     api.setStatusBarStyle({
         style: 'dark',
         color: "#33475f"
-    });   
+    }); 
+
+    //判断用户当前所处的状态  
+    var hasFirst = $api.getStorage('hasFirst');
+    var token = $api.getStorage('token');
+
+    if(!token || !token.uid){
+        return openWin('root', './html/login.html');
+    }
+
+    if(!hasFirst){
+        return openWin('root', './html/welcome.html');
+    }
 
     funIniGroup();
 }
 
-    function funIniGroup(){
-        var footerLis = $api.domAll('#footer li');
+function funIniGroup(){
+    var footerLis = $api.domAll('#footer li');
 
-        api.openFrameGroup({
-            name: 'group',
-            scrollEnabled: false,
-            rect: {
-                x: 0, 
-                y: $api.dom('header').offsetHeight, 
-                w: api.winWidth, 
-                h: $api.dom('#main').offsetHeight
+    api.openFrameGroup({
+        name: 'group',
+        scrollEnabled: false,
+        rect: {
+            x: 0, 
+            y: $api.dom('header').offsetHeight, 
+            w: api.winWidth, 
+            h: $api.dom('#main').offsetHeight
+        },
+        index: 0,
+        frames: [{ 
+                name: 'main', 
+                url: './html/main.html', 
+                bgColor : 'rgba(0,0,0,.2)',
+                bounces:false
             },
-            index: 0,
-            frames: [{ 
-                    name: 'main', 
-                    url: './html/main.html', 
-                    bgColor : 'rgba(0,0,0,.2)',
-                    bounces:false
-                },
-                { 
-                    name: 'buy', 
-                    url: './html/buy.html', 
-                    bgColor : 'rgba(0,0,0,.2)',
-                    bounces:false
-                },
-                { 
-                    name: 'setting', 
-                    url: './html/setting.html', 
-                    bgColor : 'rgba(0,0,0,.2)',
-                    bounces:false
-                }]
-        }, function (ret, err) {
+            { 
+                name: 'buy', 
+                url: './html/buy.html', 
+                bgColor : 'rgba(0,0,0,.2)',
+                bounces:false
+            },
+            { 
+                name: 'setting', 
+                url: './html/setting.html', 
+                bgColor : 'rgba(0,0,0,.2)',
+                bounces:false
+            }]
+    }, function (ret, err) {
 
-        });
-    }
+    });
+}
 
-    // 随意切换按钮
-    function randomSwitchBtn( tag ) {
-        if( tag == $api.dom('#footer li.active') )return;
-        var eFootLis = $api.domAll('#footer li'),
-            eHeaderLis = $api.domAll('header li'),
-            index = 0;
-        for (var i = 0,len = eFootLis.length; i < len; i++) {
-            if( tag == eFootLis[i] ){
-                index = i;
-            }else{
-                $api.removeCls(eFootLis[i], 'active');
-                $api.removeCls(eHeaderLis[i], 'active');
-            }
+// 随意切换按钮
+function randomSwitchBtn( tag ) {
+    if( tag == $api.dom('#footer li.active') )return;
+    var eFootLis = $api.domAll('#footer li'),
+        eHeaderLis = $api.domAll('header li'),
+        index = 0;
+    for (var i = 0,len = eFootLis.length; i < len; i++) {
+        if( tag == eFootLis[i] ){
+            index = i;
+        }else{
+            $api.removeCls(eFootLis[i], 'active');
+            $api.removeCls(eHeaderLis[i], 'active');
         }
-        $api.addCls( eFootLis[index], 'active');
-        $api.addCls( eHeaderLis[index], 'active');
-        api.setFrameGroupIndex({
-            name: 'group',
-            index: index
-        });
     }
+    $api.addCls( eFootLis[index], 'active');
+    $api.addCls( eHeaderLis[index], 'active');
+    api.setFrameGroupIndex({
+        name: 'group',
+        index: index
+    });
+}
 
 </script>

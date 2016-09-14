@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/aui.2.0.css">
     <style>
+    html,body{
+    	width: 100%;
+    	height: 100%;
+    }
     .aui-btn {
     	width: 40%;
     	display: inline-block;
@@ -20,6 +24,8 @@
     </style>
 </head>
 <body>
+	<div id="mask" style="position:fixed;width:100%;height:100%;z-index:2;background:rgba(0,0,0,0.4);" hidden></div>
+
     <header class="aui-bar aui-bar-nav" style="background: #ffc107">
         <a class="aui-pull-left aui-btn" tapmode onclick="closeWin('warehouse_filter')">
             <span class="aui-iconfont aui-icon-left"></span>
@@ -36,15 +42,15 @@
 	    	<li class="aui-list-item">
 	            <div class="aui-list-item-inner">
 	                <div class="aui-list-item-label" style="font-size:12px;width:45%;">
-	                    开始日期：
+	                    开始日期：&nbsp;
 	                </div>
-	                <div class="aui-list-item-input">
+	                <div class="aui-list-item-input"  tapmode onclick="openDatePicker()">
 	                    <input type="text" value="0000-00-00" disabled="disabled" style="color:#ffc107;font-weight:600;">
 	                </div>
 	                <div class="aui-list-item-label" style="font-size:12px;width:45%;">
-	                    截至日期：
+	                    截至日期：&nbsp;
 	                </div>
-	                <div class="aui-list-item-input">
+	                <div class="aui-list-item-input"  tapmode onclick="openDatePicker()">
 	                    <input type="text" value="0000-00-00" disabled="disabled" style="color:#ffc107;font-weight:600;">
 	                </div>
 	            </div>
@@ -109,6 +115,57 @@ apiready = function () {
         style: 'dark',
         color: "#33475f"
     });   
+}
+
+function openDatePicker(){
+	var UICalendar = api.require('UICalendar');
+
+	$('#mask').removeAttr("hidden");
+	
+	UICalendar.open({
+	    rect: {
+	        x: 30,
+	        y: api.frameHeight / 2 - 170,
+	        w: api.frameWidth - 60,
+	        h: 340
+	    },
+	    styles: {
+	        bg: '#fff',
+	        week: {
+	            weekdayColor: '#3b3b3b',
+	            weekendColor: '#a8d400',
+	            size: 12
+	        },
+	        date: {
+	            color: '#3b3b3b',
+	            selectedColor: '#fff',
+	            selectedBg: '#a8d500',
+	            size: 12
+	        },
+	        today: {
+	            color: 'rgb(230,46,37)',
+	            bg: ''
+	        },
+	        specialDate: {
+	            color: '#a8d500'
+	        }
+	    },
+	    specialDate: [{
+	        date: '2015-06-01'
+	    }],
+	    switchMode: 'vertical',
+	    fixedOn: api.frameName,
+	    fixed: false
+	}, function(ret, err) {
+	    if (ret) {
+	    	if(ret.eventType === 'normal'){
+	   	        UICalendar.close();
+	       		$('#mask').attr("hidden", ''); 		
+	    	}
+	    } else {
+	        alert(err);
+	    }
+	});
 }
 </script>
 </html>
