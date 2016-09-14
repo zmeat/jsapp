@@ -7,25 +7,76 @@
     <link rel="stylesheet" type="text/css" href="../css/api.css"/>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/aui.2.0.css">
+    <link rel="stylesheet" href="../css/aui-slide.css">
     <style>
-
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+        #jump {
+            width: 80px;
+            height: 35px;
+            position: fixed;
+            top: 30px;
+            right: 20px;
+            z-index: 999;
+            color: #fff;
+            text-align: center;
+            font-size: 20px;
+            letter-spacing: 4px;
+            border-radius: 4px;
+            border: 1px solid #fff;
+            font-family: '微软雅黑'
+        }
     </style>
 </head>
 <body>
-    welcome 
+    <div id="jump" tapmode onclick="setFirst()">跳过</div>
+    <div id="aui-slide">
+        <div class="aui-slide-wrap" >
+            <div class="aui-slide-node bg-dark"
+                style="background:url(../image/welcome1.jpg) no-repeat;background-size:cover;">
+                <!-- <img src="../image/welcome1.jpg" /> -->
+            </div>
+            <div class="aui-slide-node bg-dark" 
+                style="background:url(../image/welcome2.jpg) no-repeat;background-size:cover;">
+                <!-- <img src="../image/welcome2.jpg" /> -->
+            </div>
+            <div class="aui-slide-node bg-dark" 
+                style="background:url(../image/welcome3.png) no-repeat;background-size:cover;" 
+                tapmode onclick="setFirst()">
+               <!--  <img src="../image/welcome3.png" /> -->
+            </div>
+        </div>
+        <div class="aui-slide-page-wrap"><!--分页容器--></div>
+    </div>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/zepto.min.js"></script>
 <script type="text/javascript" src="../script/touch.js"></script>
+<script type="text/javascript" src="../script/aui-slide.js"></script>
 <script type="text/javascript" src="../script/common.js"></script>
+
 <script type="text/javascript">
 apiready = function(){
-	setFirst();
-};
-function setFirst(){
-	$api.setStorage('hasFirst', {uid: 1, username: 'zjw', timestamp: '20160914'});
 
-	openWin('root', '../index.html');
+};
+$(function(){
+    var slide = new auiSlide({
+        container:document.getElementById("aui-slide"), //容器
+        "width": '100%', //宽度
+        "height": '100%', //高度
+        "speed":500, //速度
+        "autoPlay": false, //自动播放
+        "loop":false,//是否循环
+        "pageShow":true,//是否显示分页器
+        "pageStyle":'dot', //分页器样式，分dot,line
+        'dotPosition':'center' //当分页器样式为dot时控制分页器位置，left,center,right
+    })
+})
+function setFirst(){
+    $api.setStorage('hasFirst', {uid: 1, username: 'zjw', timestamp: '20160914'});
+    openWin('root', '../index.html');
 }
 </script>
 </html>
