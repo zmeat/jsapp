@@ -53,13 +53,16 @@
 
 
  	zmeatPopup.prototype.open = function(cb){
- 		document.body.appendChild(self.mask);
- 		document.body.appendChild(self.container);
+ 		//此处延时200毫秒是为了防止误触
+ 		setTimeout(function(){
+	 		document.body.appendChild(self.mask);
+	 		document.body.appendChild(self.container);
 
- 		//return clicked htmlnode
- 		if(typeof(cb) === 'function'){
- 			self.cb = cb;
- 		}
+	 		//return clicked htmlnode
+	 		if(typeof(cb) === 'function'){
+	 			self.cb = cb;
+	 		} 			
+ 		}, 200);
  	}
 
 

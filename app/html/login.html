@@ -106,47 +106,6 @@ apiready = function(){
     }); 
 };
 
-$(function(){
-    var el = [
-        {
-            name: "选项一",
-            value: 2
-        },
-        {
-            name: "选项二",
-            value: 3
-        },
-        {
-            name: "选项三",
-            value: 23
-        },
-        {
-            name: "选项四",
-            value: 4
-        },
-        {
-            name: "选项五",
-            value: 444
-        },
-        {
-            name: "选项六",
-            value: 444
-        },
-        {
-            name: "选项七",
-            value: 44
-        }];
-
-    var popup = new zmeatPopup(el);
-
-    popup.open(function(idata){
-        alert(idata);
-        popup.close();
-    });
-
-
-})
-
 
 function login(){
     $api.setStorage('token', {uid: '1', username: 'zjw'});
@@ -177,23 +136,29 @@ function sh(that){
 }
 function selector(that){
     var items = [{
-             text: '上海服务器',
+             name: '上海服务器',
              status: 'selected'
          }, {
-             text: '华北服务器',
+             name: '华北服务器',
              status: 'normal'
          }, {
-             text: '美国服务器',
+             name: '美国服务器',
+             status: 'normal'
+         },{
+             name: '青岛服务器',
+             status: 'normal'
+         },{
+             name: '其他服务器',
              status: 'normal'
          }];
 
-    openSelector("服务器列表", items, true, function(err, ret, module){
-        if(ret){
-            if(ret.eventType === "clickRight" || ret.eventType === "clickLeft"){
-                module.close();
-            }
-        }
+    var popup = new zmeatPopup(items);
+
+    popup.open(function(idata){
+        alert(idata);
+        popup.close();
     });
+
 }
 </script>
 </html>
