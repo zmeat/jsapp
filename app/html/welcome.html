@@ -14,38 +14,57 @@
             width: 100%;
         }
         #jump {
-            width: 80px;
-            height: 35px;
             position: fixed;
             top: 55px;
             right: 15px;
+            padding:1px 1px 1px 4px;
             z-index: 999;
-            color: #fff;
+            color: rgba(255,255,255, 0.9);
             text-align: center;
-            font-size: 20px;
-            letter-spacing: 4px;
+            font-size: 16px;
+            letter-spacing: 3px;
             border-radius: 4px;
-            border: 1px solid #fff;
+            border: 1px solid rgba(255,255,255, 0.8);
             font-family: '微软雅黑'
+        }
+        #inwrap{
+            position: fixed;
+            bottom: 65px;
+            width: 100%;
+        }
+        #in{
+            display: block;
+            width: 145px;
+            padding: 5px 15px 5px 15px;
+            z-index: 999;
+            color: rgba(255,255,255, 0.9);
+            text-align: center;
+            font-size: 22px;
+            letter-spacing: 3px;
+            border-radius: 6px;
+            border: 2px solid rgba(255,255,255, 0.8);
+            font-family: '微软雅黑';
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
-    <div id="jump" tapmode onclick="setFirst()">跳过</div>
     <div id="aui-slide">
         <div class="aui-slide-wrap" >
             <div class="aui-slide-node bg-dark"
                 style="background:url(../image/welcome1.jpg) no-repeat;background-size:cover;">
-                <!-- <img src="../image/welcome1.jpg" /> -->
+                <div id="jump" tapmode onclick="setFirst()">跳过</div>
             </div>
             <div class="aui-slide-node bg-dark" 
                 style="background:url(../image/welcome2.jpg) no-repeat;background-size:cover;">
-                <!-- <img src="../image/welcome2.jpg" /> -->
+                <div id="jump" tapmode onclick="setFirst()">跳过</div>
             </div>
             <div class="aui-slide-node bg-dark" 
-                style="background:url(../image/welcome3.png) no-repeat;background-size:cover;" 
-                tapmode onclick="setFirst()">
-               <!--  <img src="../image/welcome3.png" /> -->
+                style="background:url(../image/welcome1.jpg) no-repeat;background-size:cover;" >
+                <div id="jump" tapmode onclick="setFirst()">跳过</div>
+                <div id="inwrap">
+                    <div id="in" tapmode onclick="setFirst()">立即体验</div>      
+                </div>
             </div>
         </div>
         <div class="aui-slide-page-wrap"><!--分页容器--></div>
@@ -76,7 +95,10 @@ $(function(){
 })
 function setFirst(){
     $api.setStorage('hasFirst', {uid: 1, username: 'zjw', timestamp: '20160914'});
-    openWin('root', '../index.html');
+
+    api.closeToWin({
+        name: 'root'
+    });
 }
 </script>
 </html>

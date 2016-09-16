@@ -16,8 +16,14 @@
             width: 100%;
             display: flex;
             display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
             flex-direction: row;
             -webkit-flex-direction:  row;
+            -ms-flex-direction:  row;
+            -o-flex-direction:  row;
+            -moz-flex-direction:  row;
             background: #fff;
             padding: 15px 5px;
         }
@@ -91,7 +97,7 @@
             <div class="username">用户名：admin</div>
             <div class="address">地址：www.baidu.com</div>
         </div>
-        <div class="logout-box">
+        <div class="logout-box" tapmode onclick="logout()">
             <span>注销</span>
         </div>
     </div>
@@ -157,6 +163,12 @@ apiready = function(){
         color: "#33475f"
     });       
 };
+
+function logout(){
+    $api.rmStorage('token');
+
+    api.closeWidget();
+}
 
 </script>
 </html>

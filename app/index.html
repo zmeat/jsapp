@@ -23,7 +23,7 @@
 </head>
 <body>
 <div id="wrap" class="flex-wrap flex-vertical">
-    <header class="aui-bar aui-bar-nav" style="background: #ffc107">
+    <header class="aui-bar aui-bar-nav">
         <a class="aui-pull-left aui-btn" tapmode onclick="openSearch()">
             <span class="aui-iconfont aui-icon-search"></span>
         </a>
@@ -55,19 +55,7 @@ apiready = function () {
     api.setStatusBarStyle({
         style: 'dark',
         color: "#33475f"
-    }); 
-
-    //判断用户当前所处的状态  
-    var hasFirst = $api.getStorage('hasFirst');
-    var token = $api.getStorage('token');
-
-    if(!token || !token.uid){
-        return openWin('root', './html/login.html');
-    }
-
-    if(!hasFirst){
-        return openWin('root', './html/welcome.html');
-    }
+    });
 
     funIniGroup();//初始化framegroup
 
@@ -79,6 +67,18 @@ apiready = function () {
         if(APP.testLogin === true){
             $api.rmStorage('token');
         }
+    }
+    
+    //判断用户当前所处的状态  
+    var hasFirst = $api.getStorage('hasFirst');
+    var token = $api.getStorage('token');
+
+    if(!token || !token.uid){
+        return openWin('login', './html/login.html');
+    }
+
+    if(!hasFirst){
+        return openWin('welcome', './html/welcome.html');
     }
 
 }

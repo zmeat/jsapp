@@ -73,9 +73,9 @@
     <div class="content_box">
         <div class="form_box">
             <ul>
-                <li><i class="aui-iconfont aui-icon-menu"></i><input type="text" placeholder="请选择服务器" disabled><span class="aui-iconfont aui-icon-down"></span></li>
-                <li><i class="aui-iconfont aui-icon-my"></i><input type="text" placeholder="请输入用户名"><span class="aui-iconfont aui-icon-down"></span></li>
-                <li><i class="aui-iconfont aui-icon-lock"></i><input type="password" placeholder="请输入密码"><span class="aui-iconfont aui-icon-display"></span></li>
+                <li tapmode onclick="selector(this)"><i class="aui-iconfont aui-icon-menu"></i><input type="text" placeholder="请选择服务器" disabled="disabled"><span class="aui-iconfont aui-icon-down"></span></li>
+                <li><i class="aui-iconfont aui-icon-my"></i><input type="text" placeholder="请输入用户名"><span class="aui-iconfont"></span></li>
+                <li><i class="aui-iconfont aui-icon-lock"></i><input type="password" placeholder="请输入密码"><span class="aui-iconfont aui-icon-hide" tapmode onclick="sh(this)"></span></li>
             </ul>
         </div>
         <div class="button_box">
@@ -88,7 +88,7 @@
 <script type="text/javascript" src="../script/zepto.min.js"></script>
 <script type="text/javascript" src="../script/touch.js"></script>
 <script type="text/javascript" src="../script/common.js"></script>
-
+<script type="text/javascript" src="../script/zmeat-popup.js"></script>
 <script type="text/javascript">
 apiready = function(){
     $api.fixStatusBar( $api.dom('header') );
@@ -106,10 +106,94 @@ apiready = function(){
     }); 
 };
 
+$(function(){
+    var el = [
+        {
+            name: "选项一",
+            value: 2
+        },
+        {
+            name: "选项二",
+            value: 3
+        },
+        {
+            name: "选项三",
+            value: 23
+        },
+        {
+            name: "选项四",
+            value: 4
+        },
+        {
+            name: "选项五",
+            value: 444
+        },
+        {
+            name: "选项六",
+            value: 444
+        },
+        {
+            name: "选项七",
+            value: 44
+        }];
+
+    var popup = new zmeatPopup(el);
+
+    popup.open(function(idata){
+        alert(idata);
+        popup.close();
+    });
+
+
+})
+
+
 function login(){
     $api.setStorage('token', {uid: '1', username: 'zjw'});
 
-    openWin('root', '../index.html');
+    var hasFirst = $api.getStorage('hasFirst');
+
+    if(!hasFirst){
+        return openWin('welcome', './welcome.html');
+    }
+
+    api.closeToWin({
+        name: 'root'
+    });
+}
+
+function sh(that){
+    var isShow = $(that).hasClass('aui-icon-display');
+
+    if(isShow){
+        $(that).removeClass('aui-icon-display')
+            .addClass('aui-icon-hide')
+            .closest('li').find('input').attr('type', 'password');
+    }else{
+        $(that).removeClass('aui-icon-hide')
+            .addClass('aui-icon-display')
+            .closest('li').find('input').attr('type', 'text');
+    }
+}
+function selector(that){
+    var items = [{
+             text: '上海服务器',
+             status: 'selected'
+         }, {
+             text: '华北服务器',
+             status: 'normal'
+         }, {
+             text: '美国服务器',
+             status: 'normal'
+         }];
+
+    openSelector("服务器列表", items, true, function(err, ret, module){
+        if(ret){
+            if(ret.eventType === "clickRight" || ret.eventType === "clickLeft"){
+                module.close();
+            }
+        }
+    });
 }
 </script>
 </html>

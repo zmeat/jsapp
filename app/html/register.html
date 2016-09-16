@@ -67,7 +67,7 @@
     </style>
 </head>
 <body>
-    <header class="aui-bar aui-bar-nav" style="background: #ffc107">
+    <header class="aui-bar aui-bar-nav">
         <a class="aui-pull-left aui-btn" tapmode onclick="openWin('login', './login.html')">
             <span class="aui-iconfont aui-icon-left"></span>
         </a>
@@ -94,7 +94,7 @@
             </div>
         </div>
 
-        <button class="aui-btn aui-btn-warning aui-btn-block" style="   width: 95%;margin: 25px auto;">注册</button>
+        <button class="aui-btn aui-btn-warning aui-btn-block" style="   width: 95%;margin: 25px auto;" tapmode onclick="register()">注册</button>
         <div class="aui-content" style="padding: 0px 10px;font-size: 14px;font-family:微软雅黑">注：新注册用户免费使用30天（1用户，可在设置里领取免费使用权），试用用户所有数据均可保存。</div>
     </div>
 </body>
@@ -102,6 +102,7 @@
 <script type="text/javascript" src="../script/zepto.min.js"></script>
 <script type="text/javascript" src="../script/touch.js"></script>
 <script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/zmeat-soap.js"></script>
 <script type="text/javascript">
 apiready = function(){
     $api.fixStatusBar( $api.dom('header') );
@@ -111,27 +112,60 @@ apiready = function(){
     });   
 };
 
-    function select(){
-        var selects = ['上海服务器','广东服务器','北京服务器'];
+function select(){
+    var selects = ['上海服务器','广东服务器','北京服务器'];
 
-        api.actionSheet({
-            cancelTitle: '取消',
-            buttons: selects
-        }, function(ret, err){
-            if( ret ){
-                $(".pull_down").val(selects[ret.buttonIndex-1]);
-            }else{
-                 alert( JSON.stringify( err ) );
-            }
-        });   
-    }
+    api.actionSheet({
+        cancelTitle: '取消',
+        buttons: selects
+    }, function(ret, err){
+        if( ret ){
+            $(".pull_down").val(selects[ret.buttonIndex-1]);
+        }else{
+             alert(err);
+        }
+    });   
+}
 
+function register(){
+    var url = 'http://www.cngdp.com:6005/web/ws/r/aws_ttsrv2_toptest?wsdl';
+    var str =            "       &lt;RecordSet id='1'>"
+                        +"         &lt;Master name='gen_file'>"
+                        +"           &lt;Record>"
+                        +"             &lt;Field name='gen01' value=''/>"
+                        +"           &lt;/Record>"
+                        +"         &lt;/Master>"
+                        +"       &lt;/RecordSet>"
+    var data2 = new zmeatSoap([
+        {
+            recordId : 1,
+            master: [{
+                name: 'gen_file',
+                record: [
+                    [{
+                        name: 'gen01',
+                        value: '' 
+                    }]
+                ]
+            }]
+        }
+    ]).xml();
 
-    $(function(){
-        $(".content_box .box3 .items input").tap(function(){
-            $(this).siblings().removeClass("active");
-            $(this).addClass("active");
-        });
+    ajax(url, 'POST', data2, 'text', function(err, ret){
+        if(err){
+            return alert(err);
+        }
+
+        alert(ret);
     });
+}
+
+
+$(function(){
+    $(".content_box .box3 .items input").tap(function(){
+        $(this).siblings().removeClass("active");
+        $(this).addClass("active");
+    });
+});
 </script>
 </html>

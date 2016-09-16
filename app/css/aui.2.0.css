@@ -1561,7 +1561,8 @@ input[type="search"]::-webkit-search-cancel-button {
 	background: none;
 }
 .aui-bar-nav .aui-btn .aui-iconfont {
-	font-size: 0.9rem;
+	font-size: 1.1rem;
+	font-weight: 900;
 	line-height: 1.25rem;
 	padding: 0;
 	margin: 0;
@@ -1925,7 +1926,10 @@ input[type="search"]::-webkit-search-cancel-button {
     font-size: 0.7rem;
 }
 .aui-searchbar input::-webkit-input-placeholder {
-	color: #ccc;
+	color: #ccc !important;
+}
+.aui-list-item input::-webkit-input-placeholder{
+	color: rgba(0,0,0,0.1);
 }
 .aui-searchbar .aui-iconfont {
     line-height: 1.4rem;

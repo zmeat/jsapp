@@ -9,17 +9,34 @@
     <link rel="stylesheet" href="../css/aui.2.0.css">
     <style>
     	#wrap{
-    		display: flex;
-    		display: -webkit-flex;
-    		flex-direction: column;
-    		-webkit-flex-direction: column;
-    	}
+            display: flex;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            flex-direction: column;
+            -webkit-flex-direction:  column;
+            -ms-flex-direction:  column;
+            -o-flex-direction:  column;
+            -moz-flex-direction:  column;
+        }
     	#content{
     		width: 100%;
     		flex: 1;
-    		display: -webkit-flex;
-    		flex-direction: column;
-    		-webkit-flex-direction: column;
+    		-webkit-flex: 1;
+    		-ms-flex: 1;
+    		-moz-flex: 1;
+    		-o-flex: 1;
+            display: flex;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            flex-direction: column;
+            -webkit-flex-direction:  column;
+            -ms-flex-direction:  column;
+            -o-flex-direction:  column;
+            -moz-flex-direction:  column;
     	}
 		.aui-list-item {
 			height: 35px;
@@ -55,7 +72,7 @@
 </head>
 <body>
 <div id="wrap">
-    <header class="aui-bar aui-bar-nav" style="background: #ffc107">
+    <header class="aui-bar aui-bar-nav">
         <a class="aui-pull-left aui-btn" tapmode onclick="closeWin('warehouse_detail')">
             <span class="aui-iconfont aui-icon-left"></span>
         </a>

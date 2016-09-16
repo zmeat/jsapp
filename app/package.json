@@ -1,6 +1,7 @@
 {
 	"modules" : [
 		"UISearchBar",
-		"UICalendar"
+		"UICalendar",
+		"UIMultiSelector"
 	]
 }
