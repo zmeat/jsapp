@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>采购</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/aui.2.0.css">
+    <style>
+        html,body,ul,li{font-family: "微软雅黑"; margin:0; padding:0;}
+        .aui-bar{text-align:center; height:40px;color:#fff;line-height:40px;} 
+        .order_status ul{
+        	width:100%;
+        	/*display:-webkit-box;
+        	display:-webkit-flex;
+        	display:flex;
+        	-webkit-box-orient:horizontal;  
+        	-webkit-flex-flow:column;*/
+        }
+        .aui-list-item i{display:table-cell; text-align:center; vertical-align: middle}
+        .aui-list-item i img{vertical-align:middle; display:inline;}
+        .order_status ul li{display:inline-block;width:50%;/*-webkit-flex:1;*/float:left;}
+    </style>
+</head>
+<body>
+    <header class="aui-bar aui-bar-nav" style="background: #ffc107">订单</header>
+
+    <div class="aui-content aui-margin-b-15">
+	    <ul class="aui-list aui-list-in">
+	        <li class="aui-list-header">
+		           <div class="order_status">
+			           <div class="aui-content aui-margin-b-15">
+			               <ul class="aui-list aui-list-in">
+			                   
+			                   <li class="aui-list-item">
+			                       <div class="aui-list-item-inner">
+			                           <div class="aui-list-item-title">今日订单：</div>
+			                           <div class="aui-list-item-right">0</div>
+			                       </div>
+			                   </li>
+			                   <li class="aui-list-item">
+			                       <div class="aui-list-item-inner">
+			                           <div class="aui-list-item-title">未审核：</div>
+			                           <div class="aui-list-item-right">0</div>
+			                       </div>
+			                   </li>
+                               <li class="aui-list-item">
+                                   <div class="aui-list-item-inner">
+                                       <div class="aui-list-item-title">被驳回：</div>
+                                       <div class="aui-list-item-right">0</div>
+                                   </div>
+                               </li>
+                               <li class="aui-list-item">
+                                   <div class="aui-list-item-inner">
+                                       <div class="aui-list-item-title">已完成：</div>
+                                       <div class="aui-list-item-right">0</div>
+                                   </div>
+                               </li>
+
+			                </ul>
+			           </div>
+		           </div>
+	        </li>
+
+	        <li class="aui-list-item">
+	            <div class="aui-list-item-label-icon">
+	                <i class="aui-iconfont"><img src="../image/addtion_list.png" alt=""></i>
+	            </div>
+	            <div class="aui-list-item-inner">
+	                采购清单
+	            </div>
+	        </li>
+	        <li class="aui-list-item">
+	            <div class="aui-list-item-label-icon">
+	                <i class="aui-iconfont"><img src="../image/sale_list.png" alt=""></i>
+	            </div>
+	            <div class="aui-list-item-inner">
+	                销售清单
+	            </div>
+	        </li>
+	        <li class="aui-list-item">
+                <div class="aui-list-item-label-icon">
+                    <i class="aui-iconfont"><img src="../image/order_list.png" alt=""></i>
+                </div>
+                <div class="aui-list-item-inner">
+                    我的订单
+                </div>
+	        </li>
+	    </ul>
+	</div>
+    
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+<script type="text/javascript" src="../script/touch.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+apiready = function(){
+    $api.fixStatusBar( $api.dom('header') );
+    api.setStatusBarStyle({
+        style: 'dark',
+        color: "#33475f"
+    });       
+};
+</script>
+</html>
