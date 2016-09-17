@@ -57,17 +57,6 @@ apiready = function () {
         color: "#33475f"
     });
 
-    funIniGroup();//初始化framegroup
-
-    if(APP.env === 'test'){
-        if(APP.testWelcome === true){
-            $api.rmStorage('hasFirst');     
-        }
-
-        if(APP.testLogin === true){
-            $api.rmStorage('token');
-        }
-    }
     
     //判断用户当前所处的状态  
     var hasFirst = $api.getStorage('hasFirst');
@@ -81,6 +70,19 @@ apiready = function () {
         return openWin('welcome', './html/welcome.html');
     }
 
+    funIniGroup();//初始化framegroup
+
+    lock();
+
+    if(APP.env === 'test'){
+        if(APP.testWelcome === true){
+            $api.rmStorage('hasFirst');     
+        }
+
+        if(APP.testLogin === true){
+            $api.rmStorage('token');
+        }
+    }
 }
 
 function funIniGroup(){
@@ -141,4 +143,17 @@ function randomSwitchBtn( tag ) {
     });
 }
 
+function lock(){
+    var screenLock = api.require('screenLock');
+    
+    screenLock.show({
+        color: '#f00'
+    }, function(ret, err) {
+        if (ret) {
+            alert(JSON.stringify(ret));
+        } else {
+            alert(JSON.stringify(err));
+        }
+    });
+}
 </script>

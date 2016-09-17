@@ -165,15 +165,13 @@ apiready = function(){
 function login(){
     $api.setStorage('token', {uid: '1', username: 'zjw'});
 
-    var hasFirst = $api.getStorage('hasFirst');
-
-    if(!hasFirst){
-        return openWin('welcome', './welcome.html');
-    }
-
-    api.closeToWin({
-        name: 'root'
+    api.openWin({
+        name: 'root',
+        url: '../index.html',
+        reload: true
     });
+
+    api.closeWin();
 }
 
 function sh(that){

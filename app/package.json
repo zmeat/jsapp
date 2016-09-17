@@ -2,6 +2,8 @@
 	"modules" : [
 		"UISearchBar",
 		"UICalendar",
-		"UIMultiSelector"
+		"UIMultiSelector",
+		"screenLock",
+		"patternLock"
 	]
 }

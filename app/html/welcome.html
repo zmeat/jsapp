@@ -96,9 +96,13 @@ $(function(){
 function setFirst(){
     $api.setStorage('hasFirst', {uid: 1, username: 'zjw', timestamp: '20160914'});
 
-    api.closeToWin({
-        name: 'root'
+    api.openWin({
+        name: 'root',
+        url: '../index.html',
+        reload: true
     });
+
+    api.closeWin();
 }
 </script>
 </html>
