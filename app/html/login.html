@@ -120,9 +120,21 @@
     <div class="content_box">
         <div class="form_box">
             <ul>
-                <li tapmode onclick="selector(this)"><i class="aui-iconfont aui-icon-menu"></i><input type="text" placeholder="请选择服务器" disabled="disabled"><span class="aui-iconfont aui-icon-down"></span></li>
-                <li><i class="aui-iconfont aui-icon-my"></i><input type="text" placeholder="请输入用户名"><span class="aui-iconfont"></span></li>
-                <li><i class="aui-iconfont aui-icon-lock"></i><input type="password" placeholder="请输入密码"><span class="aui-iconfont aui-icon-hide" tapmode onclick="sh(this)"></span></li>
+                <li onclick="selector(this)">
+                    <i class="aui-iconfont aui-icon-menu"></i>
+                    <input type="text" name="fuwuqi" placeholder="请选择服务器" tapmode="hover" disabled="disabled"/>
+                    <span class="aui-iconfont aui-icon-down"></span>
+                </li>
+                <li>
+                    <i class="aui-iconfont aui-icon-my"></i>
+                    <input type="text" name="username" placeholder="请输入用户名">
+                    <span class="aui-iconfont"></span>
+                </li>
+                <li>
+                    <i class="aui-iconfont aui-icon-lock"></i>
+                    <input type="password" name="password" placeholder="请输入密码">
+                    <span class="aui-iconfont aui-icon-hide" onclick="sh(this)"></span>
+                </li>
             </ul>
         </div>
         <div class="button_box">
@@ -208,7 +220,7 @@ function selector(that){
     var popup = new zmeatPopup(items);
 
     popup.open(function(idata){
-        alert(idata);
+        $('input[name=fuwuqi]').val(idata.name);
         popup.close();
     });
 

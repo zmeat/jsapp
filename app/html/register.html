@@ -77,7 +77,7 @@
         </a>
     </header>
     <div class="content_box">
-        <div class="box1"><div class="item" onclick="select()"><span>服务器</span><input tapmode="hover" class="pull_down" type="text" placeholder="请选择服务器" disabled /></div></div>
+        <div class="box1"><div class="item" onclick="select()"><span>服务器</span><input tapmode="hover" class="pull_down" type="text" name="fuwuqi" placeholder="请选择服务器" disabled /></div></div>
         <div class="box2">
             <div class="item"><span>公司名</span><input type="text" placeholder="请输入公司名称"></div>
             <div class="item"><span>联系人</span><input type="text" placeholder="请输入联系人"></div>
@@ -103,6 +103,7 @@
 <script type="text/javascript" src="../script/touch.js"></script>
 <script type="text/javascript" src="../script/common.js"></script>
 <script type="text/javascript" src="../script/zmeat-soap.js"></script>
+<script type="text/javascript" src="../script/zmeat-popup.js"></script>
 <script type="text/javascript">
 apiready = function(){
     $api.fixStatusBar( $api.dom('header') );
@@ -113,18 +114,29 @@ apiready = function(){
 };
 
 function select(){
-    var selects = ['上海服务器','广东服务器','北京服务器'];
+    var items = [{
+             name: '上海服务器',
+             status: 'selected'
+         }, {
+             name: '华北服务器',
+             status: 'normal'
+         }, {
+             name: '美国服务器',
+             status: 'normal'
+         },{
+             name: '青岛服务器',
+             status: 'normal'
+         },{
+             name: '其他服务器',
+             status: 'normal'
+         }];
 
-    api.actionSheet({
-        cancelTitle: '取消',
-        buttons: selects
-    }, function(ret, err){
-        if( ret ){
-            $(".pull_down").val(selects[ret.buttonIndex-1]);
-        }else{
-             alert(err);
-        }
-    });   
+    var popup = new zmeatPopup(items);
+
+    popup.open(function(idata){
+        $('input[name=fuwuqi]').val(idata.name);
+        popup.close();
+    });
 }
 
 function register(){

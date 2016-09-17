@@ -18,7 +18,7 @@
  		height: '179px',
  		position: 'fixed',
  		top: '30%',
- 		zIndex: 9999,
+ 		zIndex: 9999999,
  		left: '10%',
  		borderRadius: '8px',
  		background: '#ccc',
@@ -48,7 +48,7 @@
  		}, 80);
  		var item_data = element.getAttribute('data-popup');
 
- 		self.cb(item_data);
+ 		self.cb(JSON.parse(item_data));
  	}
 
 
@@ -115,7 +115,10 @@
  		self.mask.style.width = '100%';
  		self.mask.style.height = '100%';
  		self.mask.style.position = 'fixed';
- 		self.mask.style.zIndex = 9998;
+ 		self.mask.style.zIndex = 9999998;
+ 		self.mask.style.top = 0;
+ 		self.mask.style.left = 0;
+ 		self.mask.setAttribute('onclick', 'self.close()');
  		self.mask.style.background = 'rgba(0,0,0,0.5)';
  	}
 

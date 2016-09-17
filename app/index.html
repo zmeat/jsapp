@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="./css/api.css"/>
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <link rel="stylesheet" href="./css/aui.2.0.css">
-    <link rel="stylesheet" href="../css/zmeat.css">
+    <link rel="stylesheet" href="./css/zmeat.css">
     <style>
         #footer{  background-color: #fff; box-shadow: 0px 0.1px 0.1px #f2f2f2 inset }
         #footer ul li{  padding-top:28px; padding-bottom: 4px; background: url() no-repeat center 2px; background-size: auto 27px; text-align: center; font-size: 14px; font-family: "微软雅黑";color: #a9b7b7;}
@@ -46,7 +46,7 @@
 </body>
 </html>
 <script type="text/javascript" src="./script/api.js"></script>
-<script type="text/javascript" src="../script/zepto.min.js"></script>
+<script type="text/javascript" src="./script/zepto.min.js"></script>
 <script type="text/javascript" src="./script/common.js"></script>
 <script type="text/javascript" src="./config/app.js"></script>
 <script type="text/javascript">
@@ -57,6 +57,16 @@ apiready = function () {
         color: "#33475f"
     });
 
+    
+    if(APP.env === 'test'){
+        if(APP.testWelcome === true){
+            $api.rmStorage('hasFirst');     
+        }
+
+        if(APP.testLogin === true){
+            $api.rmStorage('token');
+        }
+    }
     
     //判断用户当前所处的状态  
     var hasFirst = $api.getStorage('hasFirst');
@@ -73,16 +83,6 @@ apiready = function () {
     funIniGroup();//初始化framegroup
 
     lock();
-
-    if(APP.env === 'test'){
-        if(APP.testWelcome === true){
-            $api.rmStorage('hasFirst');     
-        }
-
-        if(APP.testLogin === true){
-            $api.rmStorage('token');
-        }
-    }
 }
 
 function funIniGroup(){
@@ -144,16 +144,68 @@ function randomSwitchBtn( tag ) {
 }
 
 function lock(){
-    var screenLock = api.require('screenLock');
-    
-    screenLock.show({
-        color: '#f00'
-    }, function(ret, err) {
-        if (ret) {
-            alert(JSON.stringify(ret));
-        } else {
-            alert(JSON.stringify(err));
+    var isAndroid = (/android/gi).test(navigator.appVersion);
+
+    function screenLock_show(cb){
+        screenLock.show({
+            color: '#56abe4'
+        }, function(ret, err) {
+            cb(ret, err);
+        });
+    }
+    function screenLock_set(cb){
+        screenLock.set({
+            color: '#56abe4'
+        }, function(ret, err) {
+            cb(ret, err);
+        });
+    }
+    function patternLock(mode, cb){
+        patternLock.addPatternLock({
+            viewName: 'main',
+            rightColor: '#00FF00',
+            drawColor: '#222222',
+            wrongColor: '#FF0000',
+            normalColor: '#000000',
+            frame: '{{0,100},{320,300}}',
+            mode: mode,
+            rightCode: '0123'
+        }, function(ret, err) {
+            cb(ret, err);
+        });
+    }
+    if(isAndroid){
+        var screenLock = api.require('screenLock');
+        
+        var lockPass = $api.getStorage('lockPass');
+
+        if(!lockPass){//如果没有设置过解锁图案则跳转至设置
+            screenLock_set(function(ret, err){
+                if (ret) {
+                    //alert(ret);
+                    $api.setStorage('lockPass', ret);
+                } else {
+                    alert(err);
+                }
+            });
+        }else{
+            screenLock_show(function(ret, err){
+                //alert(ret);
+            });
         }
-    });
+    }else{
+        var patternLock = api.require('patternLock');
+
+        if(!lockPass){//如果没有设置过解锁图案则跳转至设置
+            patternLock("1", function(ret, err){
+
+            });
+        }else{
+            patternLock("0", function(ret, err){
+
+            });
+        }
+    }
+
 }
 </script>
