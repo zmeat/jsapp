@@ -11,33 +11,39 @@
         body {
             height: 100%;
             width: auto;
-            background: url(../image/background.jpg) no-repeat;
-            background-size: 100% 100%;
-            background-position: center center;
+            background: #56abe4;
         }
         .content_box{
             width: 100%;
             position: absolute;
-            top: 27%;
+            top: 35%;
         }
         .form_box {
             display: block;
-            width: 85%;
-            background: #33475f;
-            opacity: 0.5;
+            width: 80%;
+            background: #fff;
+            opacity: 0.9;
             margin: 0px auto;
             border-radius: 8px;
-            color: #fff;
+            color: rgba(0,0,0,.8);
             font-weight: 900;
         }
         .form_box ul li:not(:first-child) {
-            border-top: .05rem solid #fff;
+            border-top: .05rem solid rgba(0,0,0,.1);
             border-collapse: thin;
         }
         .button_box {
             display: block;
-            width: 85%;
-            margin: 25px auto;
+            width: 80%;
+            margin: 15px auto;
+            margin-bottom: 25px;
+        }
+        .button_box .check_box {
+            display: block;
+            width: 100%;
+            height: 35px;
+            text-align: center;
+            margin: 18px 0px 12px 0px;
         }
         .btn-height {
             padding: 3px 0px !important;
@@ -45,8 +51,11 @@
         }
         .form_box li input {
             padding: 0px 40px;
-            font-weight: initial;
-            color: #fff;
+            font-weight: 500;
+            color: rgba(0,0,0,.9);
+        }
+        .form_box li input::-webkit-input-placeholder{
+            color: rgba(0,0,0,.4);
         }
         .form_box li {
             position: relative;
@@ -65,11 +74,49 @@
         .aui-iconfont {
             font-size: 0.9rem;
         }
-        ::-webkit-input-placeholder{color:#fff;}
-        ::-moz-placeholder{color:#fff;}
+        .register_box {
+            display: block;
+            height: 45px;
+            width: 100%;
+        }
+        .button_box button{
+            height: 40px;
+            background: #308BD2 !important;
+            border-radius: 7px;
+            margin: auto auto;
+        }
+        .register_box button{
+            width: 125px;
+            height: 100%;
+            background:#E88E38;
+            border: .05rem solid #f4c600;
+            border-radius: 7px;
+            color: #fff;
+            margin: auto auto;
+        }
+        .register_box p{
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 15px;
+        }
+        #logo {
+            position: fixed;
+            display: block;
+            width:  100%;
+            height: 17%;
+            top: 15%; 
+
+        }
+        #logo img {
+            display: block;
+            width: 60%;
+            height: 100%;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
+    <div id="logo"><img src="../image/logo.png"></div>
     <div class="content_box">
         <div class="form_box">
             <ul>
@@ -79,8 +126,16 @@
             </ul>
         </div>
         <div class="button_box">
-            <button class="aui-btn aui-btn-warning aui-btn-block btn-height" tapmode onclick="login()">登录</button>
-            <button class="aui-btn aui-btn-light aui-btn-block btn-height" style="background:#fff; border: .05rem solid #f4c600;" onclick="openWin('register', './register.html')">注册</button>
+            <div class="check_box">
+                <label><input class="aui-radio" type="checkbox" name="demo1" checked> 记住密码</label>
+                <label><input class="aui-radio" type="checkbox" name="demo1"> 忘记密码</label>                
+            </div>
+            <button class="aui-btn aui-btn-info aui-btn-block btn-height" tapmode onclick="login()">登录</button>
+        </div>
+
+        <div class="register_box">
+            <p>当前没有账户？</p>
+            <button class="aui-btn aui-btn-light aui-btn-block btn-height" onclick="openWin('register', './register.html')">注册</button>
         </div>
     </div>
 </body>

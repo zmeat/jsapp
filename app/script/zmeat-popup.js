@@ -3,10 +3,10 @@
  * @author zmeat
  * @params window
 
-* @params items[]
-* 自定数据源 items必须是是一个object[]  
-* object 必须包含name字段， 其他的字端可自定义
-* 点击每个标签时触犯回调函数，返回object对象
+ * @params items[]
+ * 自定数据源 items必须是是一个object[]  
+ * object 必须包含name字段， 其他的字端可自定义
+ * 点击每个标签时触发回调函数，返回object对象
 
  */
 
