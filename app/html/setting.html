@@ -14,34 +14,36 @@
         }
         .user-info-box {
             width: 100%;
-            display: flex;
-            display: -webkit-flex;
-            display: -moz-flex;
-            display: -ms-flex;
-            display: -o-flex;
-            flex-direction: row;
-            -webkit-flex-direction:  row;
-            -ms-flex-direction:  row;
-            -o-flex-direction:  row;
-            -moz-flex-direction:  row;
+            height: 100px;
             background: #fff;
-            padding: 15px 5px;
+            padding: 12px 5px;
         }
-        .icon-box,.logout-box{
+        .icon-box{
             display: inline-block;
-            width: 80px;
+            width: 58px;
             height: 100%;
-            margin: auto 0px;
+            vertical-align: top;
+            position: relative;
+        }
+        .logout-box {
+            display: inline-block;
+            width: 50px;
+            height: 100%;
+            vertical-align: top;
+            position: relative
         }
         .icon-box img {
-            display: block;
-            width: 100%;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            padding: 8px;
+            position: absolute;
+            top: 50%;
+            margin-top: -25px;
         }
         .msg-box {
-            flex:  1;
-            padding-left:  15px;
+            width: 58%;
+            display: inline-block;
         }
         .msg-box div{
             display: block;
@@ -61,7 +63,7 @@
         }
         .logout-box span{
             display: inline-block;
-            width:  85%;
+            width:  95%;
             height: 35px;
             border: 1px solid #ffc107;
             border-radius: 4px;
@@ -69,7 +71,10 @@
             text-align: center;
             font-size: 16px;
             font-family: "微软雅黑";
-            line-height: 2
+            line-height: 2;
+            position: absolute;
+            top: 50%;
+            margin-top: -18px;
         }
 
         .setting-box {
