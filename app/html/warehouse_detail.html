@@ -137,7 +137,7 @@
 		</div>
 
 		<!-- form -->	
-		<div id="form">
+		<div id="form" onclick="requestFull(this)">
 			<table>
 				<tr>
 					<th>单号</th>
@@ -204,13 +204,50 @@
 <script type="text/javascript" src="../script/touch.js"></script>
 <script type="text/javascript" src="../script/common.js"></script>
 <script type="text/javascript">
+var isFull = false; //记录是否有全屏的对象
+
 apiready = function () {
     $api.fixStatusBar( $api.dom('header') );
     api.setStatusBarStyle({
         style: 'dark',
         color: "#33475f"
     });   
+
+    api.addEventListener({
+    	name: 'keyback'
+	}, function(ret, err){
+	    if( ret ){
+	        if(isFull){
+	        	api.setScreenOrientation({
+				    orientation: 'portrait_up'
+				});
+				api.setFullScreen({
+				    fullScreen: false
+				});
+
+				new fullScreen().out();
+				isFull = false;
+	        }
+	    }else{
+	         alert( JSON.stringify( err ) );
+	    }
+	});
 }
+
+function requestFull(that){
+	var el = document.getElementById("form");
+
+	api.setScreenOrientation({
+	    orientation: 'landscape_left'
+	});
+	api.setFullScreen({
+	    fullScreen: true
+	});
+
+	new fullScreen(el).in();
+	isFull = true;
+}
+
 
 </script>
 </html>

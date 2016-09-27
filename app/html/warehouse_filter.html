@@ -44,18 +44,18 @@
 	                <div class="aui-list-item-label" style="font-size:12px;width:45%;">
 	                    开始日期：&nbsp;
 	                </div>
-	                <div class="aui-list-item-input"  tapmode onclick="openDatePicker()">
+	                <div class="aui-list-item-input"  tapmode onclick="openPicker(this)">
 	                    <input type="text" value="0000-00-00" disabled="disabled" style="color:#ffc107;font-weight:600;">
 	                </div>
 	                <div class="aui-list-item-label" style="font-size:12px;width:45%;">
 	                    截至日期：&nbsp;
 	                </div>
-	                <div class="aui-list-item-input"  tapmode onclick="openDatePicker()">
+	                <div class="aui-list-item-input"  tapmode onclick="openPicker(this)">
 	                    <input type="text" value="0000-00-00" disabled="disabled" style="color:#ffc107;font-weight:600;">
 	                </div>
 	            </div>
 	        </li>
-	        <li class="aui-list-item">
+	        <li class="aui-list-item" onclick="openSelect(this)">
 	            <div class="aui-list-item-inner aui-list-item-arrow">
 	                <div class="aui-list-item-label">
 	                    所在仓库
@@ -65,7 +65,7 @@
 	                </div>
 	            </div>
 	        </li>
-	        <li class="aui-list-item">
+	        <li class="aui-list-item" onclick="openSelect(this)">
 	            <div class="aui-list-item-inner aui-list-item-arrow">
 	                <div class="aui-list-item-label">
 	                    往来单位
@@ -108,6 +108,7 @@
 <script type="text/javascript" src="../script/zepto.min.js"></script>
 <script type="text/javascript" src="../script/touch.js"></script>
 <script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/zmeat-popup.js"></script>
 <script type="text/javascript">
 apiready = function () {
     $api.fixStatusBar( $api.dom('header') );
@@ -117,55 +118,33 @@ apiready = function () {
     });   
 }
 
-function openDatePicker(){
-	var UICalendar = api.require('UICalendar');
+function openPicker(that){
+    api.openPicker({
+        type: 'date',
+        date: (new Date()).Format("yyyy-MM-dd HH:mm"), //'2014-05-01 12:30'
+        title: '请选择日期'
+    }, function(ret, err) {
+        if (ret) {
+            var date = ret.year+"-"+(ret.month>=10 ? ret.month : "0"+ret.month)+"-"+(ret.day>10 ? ret.day : "0"+ret.day);
+            $(that).find('input').val(date);
+        } else {
+            alert(JSON.stringify(err));
+        }
+    });
+}
 
-	$('#mask').removeAttr("hidden");
-	
-	UICalendar.open({
-	    rect: {
-	        x: 30,
-	        y: api.frameHeight / 2 - 170,
-	        w: api.frameWidth - 60,
-	        h: 340
-	    },
-	    styles: {
-	        bg: '#fff',
-	        week: {
-	            weekdayColor: '#3b3b3b',
-	            weekendColor: '#a8d400',
-	            size: 12
-	        },
-	        date: {
-	            color: '#3b3b3b',
-	            selectedColor: '#fff',
-	            selectedBg: '#a8d500',
-	            size: 12
-	        },
-	        today: {
-	            color: 'rgb(230,46,37)',
-	            bg: ''
-	        },
-	        specialDate: {
-	            color: '#a8d500'
-	        }
-	    },
-	    specialDate: [{
-	        date: '2015-06-01'
-	    }],
-	    switchMode: 'vertical',
-	    fixedOn: api.frameName,
-	    fixed: false
-	}, function(ret, err) {
-	    if (ret) {
-	    	if(ret.eventType === 'normal'){
-	   	        UICalendar.close();
-	       		$('#mask').attr("hidden", ''); 		
-	    	}
-	    } else {
-	        alert(err);
-	    }
-	});
+function openSelect(that){
+    var selects = [
+        { name: 'item1', code: 1},
+        { name: 'item2', code: 2},
+        { name: 'item3', code: 3}
+    ];
+    var popup = new zmeatPopup(selects);
+
+    popup.open(function(data){
+        $(that).find('input').val(data.name);
+        popup.close();
+    });
 }
 </script>
 </html>
