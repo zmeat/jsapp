@@ -1929,7 +1929,7 @@ input[type="search"]::-webkit-search-cancel-button {
 	color: #ccc !important;
 }
 .aui-list-item input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{
-	color: rgba(0,0,0,0.1);
+	color: rgba(0,0,0,0.2);
 }
 .aui-searchbar .aui-iconfont {
     line-height: 1.4rem;

@@ -1,0 +1,70 @@
+<script type="text/javascript" src="config/app.js"></script>
+<script type="text/javascript" src="script/api.js"></script>
+<script>
+	apiready = function(){
+	    //设置状态栏颜色
+	    api.setStatusBarStyle({
+	        style: 'dark',
+	        color: "#33475f"
+	    });
+
+	    
+	    //判断用户当前所处的状态  
+	    var hasFirst = $api.getStorage('hasFirst');
+	    var token = $api.getStorage('token');
+
+	    //是否需要进入欢迎页面
+	    if(!hasFirst){
+	        api.openWin({
+	            name: 'welcome',
+	            url: './html/welcome.html',
+	            pageParam: {
+	            	redirect: {
+				        name: 'root',
+				        url: '../bootstrap.html',
+				        reload: true
+				    }
+	            }
+	        });
+
+	        return;
+	    }
+
+	    //是否需要进入登录页面
+	    if(!token || !token.uid){
+	        api.openWin({
+	            name: 'login',
+	            url: './html/login.html',
+	            pageParam: {
+	            	redirect: {
+	            		name: 'root',
+	            		url: '../bootstrap.html',
+	            		reload: true
+	            	}
+	            }
+	        });
+
+	        return;
+	    }
+
+	    //为了方便测试，此处在需要的时候清除token等信息
+	    if(APP.env === 'test'){
+	        if(APP.testWelcome === true){
+	            $api.rmStorage('hasFirst');     
+	        }
+
+	        if(APP.testLogin === true){
+	            $api.rmStorage('token');
+	        }
+	    }
+
+
+	    //打开应用首页
+    	api.openWin({
+            name: 'root',
+            url: 'index.html'
+        });  
+	}
+
+
+</script>

@@ -40,45 +40,109 @@
 	<div class="aui-content aui-margin-b-15 show-selection">
 	    <ul class="aui-list aui-form-list">
 	    	<li class="aui-list-item">
-	            <div class="aui-list-item-inner">
-	                <div class="aui-list-item-label" style="font-size:12px;width:45%;">
-	                    开始日期：&nbsp;
-	                </div>
-	                <div class="aui-list-item-input"  tapmode onclick="openPicker(this)">
-	                    <input type="text" value="0000-00-00" disabled="disabled" style="color:#ffc107;font-weight:600;">
-	                </div>
-	                <div class="aui-list-item-label" style="font-size:12px;width:45%;">
-	                    截至日期：&nbsp;
+	            <div class="aui-list-item-inner aui-list-item-arrow">
+	                <div class="aui-list-item-label">
+	                    开始日期：
 	                </div>
 	                <div class="aui-list-item-input"  tapmode onclick="openPicker(this)">
 	                    <input type="text" value="0000-00-00" disabled="disabled" style="color:#ffc107;font-weight:600;">
 	                </div>
 	            </div>
 	        </li>
-	        <li class="aui-list-item" onclick="openSelect(this)">
-	            <div class="aui-list-item-inner aui-list-item-arrow">
+	        <li class="aui-list-item">
+	        	<div class="aui-list-item-inner aui-list-item-arrow">
 	                <div class="aui-list-item-label">
-	                    所在仓库
+	                    截至日期：
 	                </div>
-	                <div class="aui-list-item-input">
-	                    <input type="text" placeholder="请选择" disabled="disabled">
-	                </div>
-	            </div>
-	        </li>
-	        <li class="aui-list-item" onclick="openSelect(this)">
-	            <div class="aui-list-item-inner aui-list-item-arrow">
-	                <div class="aui-list-item-label">
-	                    往来单位
-	                </div>
-	                <div class="aui-list-item-input">
-	                    <input type="text" placeholder="请选择" disabled="disabled">
+	                <div class="aui-list-item-input"  tapmode onclick="openPicker(this)">
+	                    <input type="text" value="0000-00-00" disabled="disabled" style="color:#ffc107;font-weight:600;">
 	                </div>
 	            </div>
 	        </li>
 	        <li class="aui-list-item">
 	            <div class="aui-list-item-inner">
 	                <div class="aui-list-item-label">
-	                    单据编号
+	                    条码：
+	                </div>
+	                <div class="aui-list-item-input">
+	                    <input type="text" placeholder="请输入条码">
+	                </div>
+	            </div>
+	        </li>
+	        <li class="aui-list-item">
+	            <div class="aui-list-item-inner">
+	                <div class="aui-list-item-label">
+	                    料件编号：
+	                </div>
+	                <div class="aui-list-item-input">
+	                    <input type="text" placeholder="请输入料件编号">
+	                </div>
+	            </div>
+	        </li>
+	        <li class="aui-list-item">
+	            <div class="aui-list-item-inner">
+	                <div class="aui-list-item-label">
+	                    品名：
+	                </div>
+	                <div class="aui-list-item-input">
+	                    <input type="text" placeholder="请输入品名">
+	                </div>
+	            </div>
+	        </li>
+	       	<li class="aui-list-item">
+	            <div class="aui-list-item-inner">
+	                <div class="aui-list-item-label">
+	                    规格：
+	                </div>
+	                <div class="aui-list-item-input">
+	                    <input type="text" placeholder="请输入规格">
+	                </div>
+	            </div>
+	        </li>
+	        <li class="aui-list-item" onclick="openSelect(this)">
+	            <div class="aui-list-item-inner aui-list-item-arrow">
+	                <div class="aui-list-item-label">
+	                    仓库：
+	                </div>
+	                <div class="aui-list-item-input">
+	                    <input type="text" placeholder="请选择仓库" disabled="disabled">
+	                </div>
+	            </div>
+	        </li>
+	        <li class="aui-list-item">
+	            <div class="aui-list-item-inner">
+	                <div class="aui-list-item-label">
+	                    库位：
+	                </div>
+	                <div class="aui-list-item-input">
+	                    <input type="text" placeholder="请输入库位">
+	                </div>
+	            </div>
+	        </li>
+	        <li class="aui-list-item">
+	            <div class="aui-list-item-inner">
+	                <div class="aui-list-item-label">
+	                    批号：
+	                </div>
+	                <div class="aui-list-item-input">
+	                    <input type="text" placeholder="请输入批号">
+	                </div>
+	            </div>
+	        </li>
+	        <li class="aui-list-item" onclick="openSelect(this)">
+	            <div class="aui-list-item-inner aui-list-item-arrow">
+	                <div class="aui-list-item-label">
+	                    单位：
+	                </div>
+	                <div class="aui-list-item-input">
+	                    <input type="text" placeholder="请选择单位" disabled="disabled">
+	                </div>
+	            </div>
+	        </li>
+	        <li class="aui-list-item">
+	            <div class="aui-list-item-inner">
+	                <div class="aui-list-item-label">
+	                    单据编号：
 	                </div>
 	                <div class="aui-list-item-input">
 	                    <input type="text" placeholder="请输入编号">

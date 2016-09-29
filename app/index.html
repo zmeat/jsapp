@@ -52,37 +52,16 @@
 <script type="text/javascript">
 apiready = function () {
     $api.fixStatusBar( $api.dom('header') );
-    api.setStatusBarStyle({
-        style: 'dark',
-        color: "#33475f"
-    });
 
-    
-    if(APP.env === 'test'){
-        if(APP.testWelcome === true){
-            $api.rmStorage('hasFirst');     
-        }
+    //初始化framegroup
+    funIniGroup();
 
-        if(APP.testLogin === true){
-            $api.rmStorage('token');
-        }
-    }
-    
-    //判断用户当前所处的状态  
-    var hasFirst = $api.getStorage('hasFirst');
-    var token = $api.getStorage('token');
-
-    if(!token || !token.uid){
-        return openWin('login', './html/login.html');
-    }
-
-    if(!hasFirst){
-        return openWin('welcome', './html/welcome.html');
-    }
-
-    funIniGroup();//初始化framegroup
-
-    lock();
+    //监听返回键
+    api.addEventListener({
+        name: 'keyback'
+    }, function(ret, err){
+        api.toLauncher();//回到系统桌面
+    }); 
 }
 
 function funIniGroup(){
@@ -123,10 +102,12 @@ function funIniGroup(){
 
 // 随意切换按钮
 function randomSwitchBtn( tag ) {
-    if( tag == $api.dom('#footer li.active') )return;
+    if( tag == $api.dom('#footer li.active') ) return;
+
     var eFootLis = $api.domAll('#footer li'),
         eHeaderLis = $api.domAll('header li'),
         index = 0;
+
     for (var i = 0,len = eFootLis.length; i < len; i++) {
         if( tag == eFootLis[i] ){
             index = i;
@@ -135,6 +116,7 @@ function randomSwitchBtn( tag ) {
             $api.removeCls(eHeaderLis[i], 'active');
         }
     }
+
     $api.addCls( eFootLis[index], 'active');
     $api.addCls( eHeaderLis[index], 'active');
     api.setFrameGroupIndex({

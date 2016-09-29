@@ -15,7 +15,7 @@
 
  	zmeatPopup.prototype.styles = {
  		width: '80%',
- 		height: '179px',
+ 		height: '134px',
  		position: 'fixed',
  		top: '30%',
  		zIndex: 9999999,
@@ -33,7 +33,7 @@
  		fontSize: '17px',
  		lineHeight: 2.6,
  		fontFamily: '微软雅黑',
- 		color: '#33475f',
+ 		color: '#007AFF',
  		letterSpacing: '1px',
  		borderBottom: '1px solid rgba(0,0,0,0.1)'
  	}
