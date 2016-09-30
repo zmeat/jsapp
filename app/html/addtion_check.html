@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
-    <title>新增入库</title>
+    <title>新增盘点</title>
     <link rel="stylesheet" type="text/css" href="../css/api.css"/>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/aui.2.0.css">
@@ -17,54 +17,56 @@
     </style>
 </head>
 <body>
-    <header class="aui-bar aui-bar-nav">
-        <a class="aui-pull-left aui-btn"  tapmode onclick="closeWin('latest_addtion')">
+    <header class="aui-bar aui-bar-nav" style="background: #03a9f4">
+        <a class="aui-pull-left aui-btn"  tapmode='hover' onclick="closeWin('addtion_check')">
             <span class="aui-iconfont aui-icon-left"></span>
         </a>
-        <div class="aui-title">新增入库</div>
+        <div class="aui-title">盘点单据</div>
         <a class="aui-pull-right aui-btn">
             <span class="aui-iconfont"></span>
         </a>
     </header>
     <div class="aui-content aui-margin-b-15">
         <ul class="aui-list aui-form-list">
-            <li class="aui-list-item" onclick="openPicker(this)">
+            <li class="aui-list-item">
                 <div class="aui-list-item-inner">
                     <div class="aui-list-item-label">单据日期</div>
                     <div class="aui-list-item-input">
-                        <input type="text" id="input_time1" placeholder="">
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item" onclick="openSelect(this)">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">单据编号</div>
-                    <div class="aui-list-item-input">
-                        <input type="text" placeholder="单据编号" disabled>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item" onclick="openSelect(this)">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">仓库</div>
-                    <div class="aui-list-item-input">
-                        <input type="text" placeholder="仓库" disabled>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item" onclick="openSelect(this)">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">部门</div>
-                    <div class="aui-list-item-input">
-                        <input type="text" placeholder="部门" disabled>
+                        <input type="text" id="input_time" placeholder="">
                     </div>
                 </div>
             </li>
             <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">单据编号</div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="不输入则自动编号">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">仓库</div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="请选择仓库">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">经办人</div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
                     <div class="aui-list-item-label">备注</div>
                     <div class="aui-list-item-input">
-                        <textarea placeholder="备注"></textarea>
+                        <input type="text" placeholder="备注">
                     </div>
+                </div>
             </li>
         </ul>
     </div> 
@@ -77,7 +79,6 @@
 <script type="text/javascript" src="../script/zepto.min.js"></script>
 <script type="text/javascript" src="../script/touch.js"></script>
 <script type="text/javascript" src="../script/common.js"></script>
-<script type="text/javascript" src="../script/zmeat-popup.js"></script>
 <script type="text/javascript" src="../script/yanmeng.js"></script>
 <script type="text/javascript">
 apiready = function(){
@@ -86,41 +87,13 @@ apiready = function(){
         style: 'dark',
         color: "#33475f"
     });       
-}
+};
 
 window.onload=function(){
-    var times=document.getElementById('input_time1');
+    var times=document.getElementById('input_time');
    
     times.value= fnTime();
 }
 
-function openPicker(that){
-    api.openPicker({
-        type: 'date',
-        date: (new Date()).Format("yyyy-MM-dd HH:mm"), //'2014-05-01 12:30'
-        title: '请选择日期'
-    }, function(ret, err) {
-        if (ret) {
-            var date = ret.year+"-"+(ret.month>=10 ? ret.month : "0"+ret.month)+"-"+(ret.day>=10 ? ret.day : "0"+ret.day);
-            $(that).find('input').val(date);
-        } else {
-            alert(JSON.stringify(err));
-        }
-    });
-}
-
-function openSelect(that){
-    var selects = [
-        { name: 'item1', code: 1},
-        { name: 'item2', code: 2},
-        { name: 'item3', code: 3}
-    ];
-    var popup = new zmeatPopup(selects);
-
-    popup.open(function(data){
-        $(that).find('input').val(data.name);
-        popup.close();
-    });
-}
 </script>
 </html>
