@@ -14,11 +14,40 @@
         .addtion-bottom{width:100%;height:40px; background-color: #444444; position:absolute; left:0; bottom:0;}
         .addtion-bottom p{color:#fff; height:40px; position: absolute; left:50%; top:0; line-height:40px;}
         .addtion-bottom img{width:36px;height:36px; position:absolute; left:50%; top:2px; margin-left: -42px; border:none;}
+
+
+        #form{
+            flex: 1;
+            width: 100%;
+            background: #fff;
+            position: relative;
+        }
+        table {
+            white-space: nowrap;
+            text-align: center;
+        }
+        table th{
+            background: rgba(0,0,0,0.1);
+        }
+        table th,td{
+            border-right:1px solid #ccc;
+            border-bottom:1px solid #ccc;
+        }
+        table th,td{
+            padding: 2px;
+            min-height: 20px;
+            min-width: 130px;
+            max-height: 25px;
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+        }
     </style>
 </head>
 <body>
     <header class="aui-bar aui-bar-nav">
-        <a class="aui-pull-left aui-btn"  tapmode onclick="closeWin('latest_addtion')">
+        <a class="aui-pull-left aui-btn"  tapmode onclick="back()">
             <span class="aui-iconfont aui-icon-left"></span>
         </a>
         <div class="aui-title">新增入库</div>
@@ -28,32 +57,56 @@
     </header>
     <div class="aui-content aui-margin-b-15">
         <ul class="aui-list aui-form-list">
-            <li class="aui-list-item" onclick="openPicker(this)">
-                <div class="aui-list-item-inner">
+            <li class="aui-list-item required" onclick="openPicker(this)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
                     <div class="aui-list-item-label">单据日期</div>
                     <div class="aui-list-item-input">
-                        <input type="text" id="input_time1" placeholder="">
+                        <input type="text" name="time1" placeholder="">
                     </div>
                 </div>
             </li>
-            <li class="aui-list-item" onclick="openSelect(this)">
-                <div class="aui-list-item-inner">
+            <li class="aui-list-item required" onclick="openSelect(this)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
                     <div class="aui-list-item-label">单据编号</div>
                     <div class="aui-list-item-input">
                         <input type="text" placeholder="单据编号" disabled>
                     </div>
                 </div>
             </li>
-            <li class="aui-list-item" onclick="openSelect(this)">
+            <li class="aui-list-item required">
                 <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">仓库</div>
+                    <div class="aui-list-item-label">人员</div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="仓库" disabled>
+                        <input type="text" placeholder="人员" name="user">
                     </div>
                 </div>
             </li>
-            <li class="aui-list-item" onclick="openSelect(this)">
+            <li class="aui-list-item required" onclick="openSelect(this)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-label">仓库</div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="仓库">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item required">
                 <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">库位</div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="库位">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item required">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">批号</div>
+                    <div class="aui-list-item-input">
+                        <input type="text" placeholder="批号">
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item required" onclick="openSelect(this)">
+                <div class="aui-list-item-inner aui-list-item-arrow">
                     <div class="aui-list-item-label">部门</div>
                     <div class="aui-list-item-input">
                         <input type="text" placeholder="部门" disabled>
@@ -67,8 +120,36 @@
                     </div>
             </li>
         </ul>
-    </div> 
-    <div class="addtion-bottom" tapmode onclick="openWin('latest_addtion-2','./latest_addtion-2.html')">
+    </div>
+
+
+    <!-- form -->   
+    <div id="form" onclick="showMenu()" hidden>
+        <div id="menu" style="width:100%;height: 45px; background: #a9b7b7; position: absolute; top:0;" hidden>
+            <a class="aui-pull-right" onclick="requestFull(this)">
+                <span><img width="32" height="32" src="../image/full.png" style="position: absolute; right: 15px; top: 50%; margin-top: -16px"></span>
+            </a>
+        </div>
+        <div style="overflow: scroll">
+            <table>
+                <tr>
+                    <th>单据日期</th>
+                    <th>单据编号</th>
+                    <th>人员</th>
+                    <th>仓库</th>
+                    <th>库位</th>
+                    <th>批号</th>
+                    <th>部门</th>
+                    <th>计量单位</th>
+                    <th>备注</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+
+    <div class="addtion-bottom" tapmode onclick="openWin('addtion_goods','./addtion_goods.html')">
         <img src="../image/addtion-bottom.png" alt="addtion">
         <p>添加货品</p>
     </div>       
@@ -80,18 +161,84 @@
 <script type="text/javascript" src="../script/zmeat-popup.js"></script>
 <script type="text/javascript" src="../script/yanmeng.js"></script>
 <script type="text/javascript">
+var isFull = false; //记录是否有全屏的对象
+    isShow = false;
+    hasNew = false;
+
+
 apiready = function(){
     $api.fixStatusBar( $api.dom('header') );
     api.setStatusBarStyle({
         style: 'dark',
         color: "#33475f"
-    });       
+    });
+
+    //监听返回事件
+    api.addEventListener({
+        name: 'keyback'
+    }, function(ret, err){
+        if(isFull){
+            api.setFullScreen({
+                fullScreen: false
+            });
+
+            api.setScreenOrientation({
+                orientation: 'portrait_up'
+            });
+
+            new fullScreen().out();
+            isFull = false;
+            $(that).find('img').attr('src', '../image/full.png');
+        }else{
+            if(hasNew){
+                api.confirm({
+                    title: '',
+                    msg: '您有单据未保存，确定退出？',
+                    buttons: ['确定', '取消']
+                }, function(ret, err){
+                    if( ret ){
+                         if(ret.buttonIndex === 1){
+                            api.closeWin();
+                         }
+                    }else{
+                         alert( JSON.stringify( err ) );
+                    }
+                });
+            }
+        }
+    });
+
+    //监听添加货品保存事件
+    api.addEventListener({
+        name: 'add_good_save'
+    }, function(ret, err){
+        if( ret ){
+            var html = '<tr>';
+
+            for(key in ret.value){
+                html += '<td>'+ret.value[key]+'</td>';
+            }
+            html += "<td><span style=\"float:left;padding:2px;color:#e51c23;\" onclick=\"remove(this, event)\">删除</span><span style=\"float:right;padding:2px;color:#00bcd4;\" onclick=\"edit(this, event)\">修改</span></td></tr>";
+
+            $('#form').removeAttr('hidden').find('table').append(html);
+            hasNew = true;//更新状态
+
+                
+        }else{
+             alert( JSON.stringify( err ) );
+        }
+    });
 }
 
 window.onload=function(){
-    var times=document.getElementById('input_time1');
-   
-    times.value= fnTime();
+    var user = $api.getStorage('token'),
+        username = user && (user.username ? user.username : '');
+
+    $('input[name=time1]').val(fnTime);
+    $('input[name=user]').val(username);
+
+    //为表格添加编辑按钮
+    needEdit('#form');
 }
 
 function openPicker(that){
@@ -102,6 +249,7 @@ function openPicker(that){
     }, function(ret, err) {
         if (ret) {
             var date = ret.year+"-"+(ret.month>=10 ? ret.month : "0"+ret.month)+"-"+(ret.day>=10 ? ret.day : "0"+ret.day);
+
             $(that).find('input').val(date);
         } else {
             alert(JSON.stringify(err));
@@ -121,6 +269,107 @@ function openSelect(that){
         $(that).find('input').val(data.name);
         popup.close();
     });
+}
+
+//返回按钮事件
+function back(){
+    api.confirm({
+        title: '',
+        msg: '您有单据未保存，确定退出？',
+        buttons: ['确定', '取消']
+    }, function(ret, err){
+        if( ret ){
+             if(ret.buttonIndex === 1){
+                api.closeWin();
+             }
+        }else{
+             alert( JSON.stringify( err ) );
+        }
+    });
+}
+
+function requestFull(that){
+    var el = document.getElementById("form");
+
+    if(!isFull){//全屏
+        api.setScreenOrientation({
+            orientation: 'landscape_left'
+        });
+        api.setFullScreen({
+            fullScreen: true
+        });
+
+        new fullScreen(el).in();
+        isFull = true;
+
+        $(that).find('img').attr('src', '../image/cancel_full.png');
+    }else{//取消全屏
+        api.setFullScreen({
+            fullScreen: false
+        });
+
+        api.setScreenOrientation({
+            orientation: 'portrait_up'
+        });
+
+        new fullScreen().out();
+        isFull = false;
+
+        $(that).find('img').attr('src', '../image/full.png');
+    }
+
+}
+
+
+
+function needEdit(el){
+    $(el).find('tr').each(function(key, val){
+        if(key === 0){
+            $(this).append('<th>操作</th>')
+        }else{
+            $(this).append("<td><span style=\"float:left;padding:2px;color:#e51c23;\" onclick=\"remove(this, event)\">删除</span><span style=\"float:right;padding:2px;color:#00bcd4;\" onclick=\"edit(this, event)\">修改</span></td>")
+        }
+    });
+}
+
+function showMenu(){
+    if(isShow){
+        isShow = false;
+        $('#menu').attr('hidden', 'hidden');
+    }else{
+        isShow = true;
+
+        setTimeout(function(){
+            $('#menu').removeAttr('hidden');        
+        },100);
+    }
+
+}
+
+function remove(that, e){
+    e.preventDefault();
+    e.stopPropagation();
+
+    api.confirm({
+        title: '',
+        msg: '确定要删除改行数据吗？',
+        buttons: ['确定', '取消']
+    }, function(ret, err){
+        if( ret ){
+            if(ret.buttonIndex === 1){
+                $(that).closest('tr').remove();
+            }
+        }else{
+             alert( JSON.stringify( err ) );
+        }
+    });
+}
+
+function edit(that, e){
+    e.preventDefault();
+    e.stopPropagation();
+    
+    openWin('addtion_goods', '../html/addtion_goods.html');
 }
 </script>
 </html>

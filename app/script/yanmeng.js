@@ -20,8 +20,20 @@ function fnTime () {
     if( iWeek === 5 ) iWeek = '星期五';
     if( iWeek === 6 ) iWeek = '星期六';
     
-    str = iYear+ '-' +iMonth+'-'+iDate;
+
+
+    str = iYear+ '-' +format(iMonth)+'-'+format(iDate);
     
     return str;
 
+}
+
+function format(d){
+    var i = /([0-9]){2}/.test(d+'');
+
+    if(i){
+        return d;
+    }else{
+        return '0'+d;
+    }
 }

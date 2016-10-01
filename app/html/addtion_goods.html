@@ -12,6 +12,8 @@
         .aui-list-header{text-align:center; height:40px;} 
         .aui-list-header p{color:#fff;}
         .aui-icon-save{width:24px;height:24px;margin-top:4px;}
+
+
     </style>
 </head>
 <body>
@@ -20,64 +22,81 @@
             <span class="aui-iconfont aui-icon-left"></span>
         </a>
         <div class="aui-title">新增货品</div>
-        <a class="aui-pull-right aui-btn" tapmode='hover' onclick=" "> <!-- 保存按钮 -->
+        <a class="aui-pull-right aui-btn" tapmode='hover' onclick="save()"> <!-- 保存按钮 -->
             <span class="aui-iconfont aui-icon-save"><img class="aui-icon-save" src="../image/save.png" alt=""></span>
         </a>
     </header>
     <div class="aui-content aui-margin-b-15">
         <ul class="aui-list aui-form-list">
+            <li class="aui-list-item" onclick="openScaner(this)">
+                <div class="aui-list-item-inner" style="position: relative;">
+                    <div class="aui-list-item-label">条形码</div>
+                    <div class="aui-list-item-input">
+                        <input type="text" name="tiaoma" placeholder="请输入条形码" disabled>
+                    </div>
+                    <a class="aui-iconfont" style="display: block; position: absolute;height: 100%; width: 44px;right:0"><img width="24px" height="24px" src="../image/scaner1.png" style="display: block;position: relative;top: 50%;margin-top: -12px;"></a>
+                </div>
+            </li>
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">货品编码</div>
+                    <div class="aui-list-item-label">料件编码</div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="请输入货品编码">
+                        <input type="text" name="bianma" placeholder="请输入货品编码">
                     </div>
                 </div>
             </li>
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">货品名称</div>
+                    <div class="aui-list-item-label">品名</div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="请输入货品名称">
+                        <input type="text" name="pinming" placeholder="请输入货品名称">
                     </div>
                 </div>
             </li>
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">规格型号</div>
+                    <div class="aui-list-item-label">规格</div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
+                        <input type="text" name="guige" placeholder="请输入规格">
                     </div>
                 </div>
             </li>
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">生产厂商</div>
+                    <div class="aui-list-item-label">单位</div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
+                        <input type="text" name="danwei" placeholder="请输入单位">
                     </div>
                 </div>
             </li>
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">货品类型</div>
+                    <div class="aui-list-item-label">仓库</div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="备注">
+                        <input type="text" name="warehouse" placeholder="请输入仓库">
+                    </div>
+                </div>
+            </li>
+           <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">库位</div>
+                    <div class="aui-list-item-input">
+                        <input type="text" name="kuwei" placeholder="请输入库位">
                     </div>
                 </div>
             </li>
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">字段1</div>
+                    <div class="aui-list-item-label">批号</div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
+                        <input type="text" name="pihao" placeholder="请输入批号">
                     </div>
                 </div>
             </li><li class="aui-list-item">
                 <div class="aui-list-item-inner">
-                    <div class="aui-list-item-label">字段2</div>
+                    <div class="aui-list-item-label">数量</div>
                     <div class="aui-list-item-input">
-                        <input type="text" placeholder="">
+                        <input type="number" name="shuliang" placeholder="请输入数量">
                     </div>
                 </div>
             </li>
@@ -86,8 +105,8 @@
     
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
-<script type="text/javascript" src="../script/zepto.min.js"></script>
-<script type="text/javascript" src="../script/touch.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/jquery.validate.min.js"></script>
 <script type="text/javascript" src="../script/common.js"></script>
 <script type="text/javascript">
 apiready = function(){
@@ -97,5 +116,75 @@ apiready = function(){
         color: "#33475f"
     });       
 };
+
+function save(){
+    var values = {};
+
+    values.tiaoma = $('input[name=tiaoma]').val();
+    values.bianma = $('input[name=bianma]').val();
+    values.pinming = $('input[name=pinming]').val();
+    values.guige = $('input[name=guige]').val();
+    values.danwei = $('input[name=danwei]').val();
+    values.warehouse = $('input[name=warehouse]').val();
+    values.kuwei = $('input[name=kuwei]').val();
+    values.pihao = $('input[name=pihao]').val();
+    values.shuliang = $('input[name=shuliang]').val();
+
+
+    //检查参数
+    var errormsg = checkValues(values);
+
+    if(errormsg){
+        return alert(errormsg);
+    }
+
+    api.sendEvent({
+        name: 'add_good_save',
+        extra: values
+    });
+
+    //清空数据
+    for(var key in values){
+        $('input[name='+key+']').val('');
+    }
+}
+
+function checkValues(values){
+    for(var key in values){
+        if(!values[key]){
+            return "必填信息不能为空";
+        }
+    }
+}
+
+//打开二维码阅读器
+function openScaner(that){
+    var FNScanner = api.require('FNScanner');
+
+    FNScanner.openScanner({
+        autorotation: true
+    }, function(ret, err) {
+        if (ret) {
+            if(ret.eventType === 'success'){
+                $(that).find('input').val(ret.content);
+            }   
+        } else {
+            alert(JSON.stringify(err));
+        }
+    });
+/*
+    cb
+    {
+        eventType: 'success',    //字符串类型；扫码事件类型
+                                 //取值范围：
+                                 //show（模块显示）
+                                 //success（扫码成功）
+                                 //fail（扫码失败）
+        imgPath: '',             //字符串类型；需要保存的二维码图片绝对路径（自定义路径）
+        albumPath: '',           //字符串类型；需要保存的二维码图片绝对路径（相册路径）
+        content: ''              //扫描的二维码/条形码信息
+    }
+*/
+}
 </script>
 </html>

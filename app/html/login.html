@@ -188,9 +188,17 @@ function login(){
         password = $('input[name=password]').val(),
         remember = $('input[name=remember]').is(':checked');//$('input[name=remember]').prop('checked')
 
+        if(!username){
+            return alert('请输入账号');
+        }
+
+        if(!password){
+            return alert('请输入密码');
+        }
+
     //如果用户设置了记住密码，则在登录成功后记住密码
     if(remember){
-        $api.setStorage('token', {uid: '1', username: 'zjw'});
+        $api.setStorage('token', {uid: '1', username: username, password: password});
         $api.setStorage('userLogInfo', {username: username, password: password});
     }else{//如果没有设置记住密码，则尝试删除可能存在的旧的账号信息
         $api.setStorage('token', {uid: '1', username: 'zjw'});

@@ -4,6 +4,7 @@
 		"UICalendar",
 		"UIMultiSelector",
 		"screenLock",
-		"patternLock"
+		"patternLock",
+		"FNScanner"
 	]
 }
