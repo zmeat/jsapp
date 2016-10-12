@@ -114,8 +114,22 @@ apiready = function(){
     api.setStatusBarStyle({
         style: 'dark',
         color: "#33475f"
-    });       
+    });
+
+    //如果有传递过来的需要展示的数据填充数据
+    appendData();
 };
+
+
+function appendData(){
+    var pageParam = api.pageParam;
+
+    if(typeof(pageParam) === 'object'){
+        for(var key in pageParam.params){
+            $('input[name='+key+']').val(pageParam.params[key]);
+        }
+    }    
+}
 
 function save(){
     var values = {};
@@ -147,6 +161,10 @@ function save(){
     for(var key in values){
         $('input[name='+key+']').val('');
     }
+
+    api.toast({
+        msg: '保存成功'
+    });
 }
 
 function checkValues(values){

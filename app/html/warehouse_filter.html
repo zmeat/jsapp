@@ -71,14 +71,15 @@
 			                </div>
 			            </div>
 			        </li>
-			        <li class="aui-list-item">
-			            <div class="aui-list-item-inner">
+			        <li class="aui-list-item" onclick="openScaner(this)">
+			            <div class="aui-list-item-inner" style="position: relative;">
 			                <div class="aui-list-item-label">
-			                    条码：
+			                    条型码：
 			                </div>
 			                <div class="aui-list-item-input">
 			                    <input type="text" name="tiaoma" placeholder="请输入条码">
 			                </div>
+			                <a class="aui-iconfont" style="display: block; position: absolute;height: 100%; width: 44px;right:0"><img width="24px" height="24px" src="../image/scaner1.png" style="display: block;position: relative;top: 50%;margin-top: -12px;"></a>
 			            </div>
 			        </li>
 			        <li class="aui-list-item">
@@ -237,7 +238,57 @@ function reset(){
 
 
 function save(){
+	var params = {
+		time1 : $('input[name=time1]').val(),
+		time2 : $('input[name=time2]').val(),
+		tiaoma : $('input[name=tiaoma]').val(),
+		bianhao : $('input[name=bianhao]').val(),
+		pinming : $('input[name=pinming]').val(),
+		guige : $('input[name=guige]').val(),
+		warehouse : $('input[name=warehouse]').val(),
+		kuwei : $('input[name=kuwei]').val(),
+		pihao : $('input[name=pihao]').val(),
+	 	danwei : $('input[name=danwei]').val(),
+		danjubianhao : $('input[name=danjubianhao]').val()
+	}
 
+	//传递参数
+	api.sendEvent({
+	    name: 'filter_save',
+	    extra: params
+	});
+
+	api.closeWin();
+}
+
+//打开二维码阅读器
+function openScaner(that){
+    var FNScanner = api.require('FNScanner');
+
+    FNScanner.openScanner({
+        autorotation: true
+    }, function(ret, err) {
+        if (ret) {
+            if(ret.eventType === 'success'){
+                $(that).find('input').val(ret.content);
+            }   
+        } else {
+            alert(JSON.stringify(err));
+        }
+    });
+/*
+    cb
+    {
+        eventType: 'success',    //字符串类型；扫码事件类型
+                                 //取值范围：
+                                 //show（模块显示）
+                                 //success（扫码成功）
+                                 //fail（扫码失败）
+        imgPath: '',             //字符串类型；需要保存的二维码图片绝对路径（自定义路径）
+        albumPath: '',           //字符串类型；需要保存的二维码图片绝对路径（相册路径）
+        content: ''              //扫描的二维码/条形码信息
+    }
+*/
 }
 </script>
 </html>

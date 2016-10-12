@@ -216,7 +216,7 @@ apiready = function(){
             var html = '<tr>';
 
             for(key in ret.value){
-                html += '<td>'+ret.value[key]+'</td>';
+                html += '<td class="'+key+'">'+ret.value[key]+'</td>';
             }
             html += "<td><span style=\"float:left;padding:2px;color:#e51c23;\" onclick=\"remove(this, event)\">删除</span><span style=\"float:right;padding:2px;color:#00bcd4;\" onclick=\"edit(this, event)\">修改</span></td></tr>";
 
@@ -369,7 +369,22 @@ function edit(that, e){
     e.preventDefault();
     e.stopPropagation();
     
-    openWin('addtion_goods', '../html/addtion_goods.html');
+    var params = {};
+
+    $(that).closest('tr').find('td').each(function(el){
+        var key = $(el).attr('class');
+        var val = $(el).text();
+
+        params[key] = val;
+    });
+
+    api.openWin({
+        name: 'addtion_goods',
+        url: '../html/addtion_goods.html',
+        pageParam: {
+            params: params
+        }
+    });
 }
 </script>
 </html>
