@@ -26,10 +26,20 @@
 
 	<div class="aui-content aui-margin-b-15">
 	    <ul class="aui-list aui-list-in">
-	        <li class="aui-list-item aui-list-item-middle">
-	            <div class="aui-list-item-inner aui-list-item-arrow">
-	                <div class="aui-list-item-title">手势密码锁定</div>
-	        </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        手势密码锁定
+                    </div>
+                    <div class="aui-list-item-input" onclick="openLock()">
+                        <input type="checkbox" class="aui-switch" checked>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item aui-list-item-middle" onclick="openWin('screen_lock', '../html/screen_lock.html')">
+                <div class="aui-list-item-inner aui-list-item-arrow">
+                    <div class="aui-list-item-title">手势密码锁定</div>
+            </li>
 	    </ul>
 	</div>
 </body>
@@ -44,6 +54,32 @@ apiready = function () {
         style: 'dark',
         color: "#33475f"
     });   
+}
+
+
+// 读取配置文件
+function readConfigFile(path, cb){
+    api.readFile({
+        path: path
+    }, function(ret, err){
+        cb(err, ret);
+    });
+}
+
+// 更新保存配置文件
+function saveConfigFile(path, jsonStringData, cb){
+    api.writeFile({
+        path: path,
+        data: jsonStringData
+    }, function(ret, err){
+        cb(err, ret);
+    });
+}
+
+function openLock(){
+    readConfigFile('../config/system.json', function(err, ret){
+        alert(ret);
+    });
 }
 </script>
 </html>

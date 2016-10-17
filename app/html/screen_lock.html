@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>手势锁设置</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/aui.2.0.css">
+    <style>
+    </style>
+</head>
+<body>
+    <header class="aui-bar aui-bar-nav">
+        <a class="aui-pull-left aui-btn" tapmode onclick="closeWin('screen_lock')">
+            <span class="aui-iconfont aui-icon-left"></span>
+        </a>
+        <div class="aui-title">手势锁设置</div>
+        <a class="aui-pull-right aui-btn">
+            <span class="aui-iconfont"></span>
+        </a>
+    </header>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+<script type="text/javascript" src="../script/touch.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+apiready = function () {
+    $api.fixStatusBar( $api.dom('header') );
+    api.setStatusBarStyle({
+        style: 'dark',
+        color: "#33475f"
+    });  
+
+    lock();
+}
+
+function lock(){
+    var isAndroid = (/android/gi).test(navigator.appVersion);
+
+    function screenLock_show(cb){
+        screenLock.show({
+            color: '#56abe4'
+        }, function(ret, err) {
+            cb(ret, err);
+        });
+    }
+    function screenLock_set(cb){
+        screenLock.set({
+            color: '#56abe4'
+        }, function(ret, err) {
+            cb(ret, err);
+        });
+    }
+    function patternLock(mode, cb){
+        patternLock.addPatternLock({
+            viewName: 'main',
+            rightColor: '#00FF00',
+            drawColor: '#222222',
+            wrongColor: '#FF0000',
+            normalColor: '#000000',
+            frame: '{{0,100},{320,300}}',
+            mode: mode,
+            rightCode: '0123'
+        }, function(ret, err) {
+            cb(ret, err);
+        });
+    }
+    if(isAndroid){
+        var screenLock = api.require('screenLock');
+        
+        var lockPass = $api.getStorage('lockPass');
+
+        if(!lockPass){//如果没有设置过解锁图案则跳转至设置
+            screenLock_set(function(ret, err){
+                if (ret) {
+                    //alert(ret);
+                    $api.setStorage('lockPass', ret);
+                } else {
+                    alert(err);
+                }
+            });
+        }else{
+            screenLock_show(function(ret, err){
+                //alert(ret);
+            });
+        }
+    }else{
+        var patternLock = api.require('patternLock');
+
+        if(!lockPass){//如果没有设置过解锁图案则跳转至设置
+            patternLock("1", function(ret, err){
+
+            });
+        }else{
+            patternLock("0", function(ret, err){
+
+            });
+        }
+    }
+
+
+// 读取配置文件
+function readConfigFile(path, cb){
+	api.readFile({
+	    path: path
+	}, function(ret, err){
+		cb(err, ret);
+	});
+}
+
+// 更新保存配置文件
+function saveConfigFile(path, jsonStringData, cb){
+	api.writeFile({
+	    path: path,
+	    data: jsonStringData
+	}, function(ret, err){
+		cb(err, ret);
+	});
+}
+
+function openLock(){
+	readConfigFile('../config/system.json', function(err, ret){
+		alert(ret);
+	});
+}
+
+}
+</script>
+</html>
