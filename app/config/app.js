@@ -1,5 +1,5 @@
 var APP = {
-	env : 'test',//test,production
+	env : 'production',//test,production
 	testLogin: false,
 	testWelcome: false
 }

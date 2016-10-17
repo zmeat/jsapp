@@ -90,7 +90,7 @@
 		                <div class="aui-list-item-label">
 		                    日期
 		                </div>
-		                <input type="text" placeholder="2016-09-14至2016-09-16" disabled>
+		                <input type="text" placeholder="2016-09-14至2016-09-16" name="time" disabled>
 		            </div>
 		        </li>
 		        <li class="aui-list-item">
@@ -99,7 +99,7 @@
 		                    条码：
 		                </div>
 		                <div class="aui-list-item-input">
-		                    <input type="text" placeholder="不限" disabled="disabled">
+		                    <input type="text" placeholder="不限" name="tiaoma" disabled="disabled">
 		                </div>
 		            </div>
 		        </li>
@@ -109,7 +109,7 @@
 		                    料件编号：
 		                </div>
 		                <div class="aui-list-item-input">
-		                    <input type="text" placeholder="不限" disabled="disabled">
+		                    <input type="text" placeholder="不限" name="bianhao" disabled="disabled">
 		                </div>
 		            </div>
 		        </li>
@@ -119,7 +119,7 @@
 		                    品名：
 		                </div>
 		                <div class="aui-list-item-input">
-		                    <input type="text" placeholder="不限" disabled="disabled">
+		                    <input type="text" placeholder="不限" name="pinming" disabled="disabled">
 		                </div>
 		            </div>
 		        </li>
@@ -129,7 +129,7 @@
 		                    规格：
 		                </div>
 		                <div class="aui-list-item-input">
-		                    <input type="text" placeholder="不限" disabled="disabled">
+		                    <input type="text" placeholder="不限" name="guige" disabled="disabled">
 		                </div>
 		            </div>
 		        </li>
@@ -139,7 +139,7 @@
 		                    仓库：
 		                </div>
 		                <div class="aui-list-item-input">
-		                    <input type="text" placeholder="不限" disabled="disabled">
+		                    <input type="text" placeholder="不限" name="warehouse" disabled="disabled">
 		                </div>
 		            </div>
 		        </li>
@@ -149,7 +149,7 @@
 		                    库位：
 		                </div>
 		                <div class="aui-list-item-input">
-		                    <input type="text" placeholder="不限" disabled="disabled">
+		                    <input type="text" placeholder="不限" name="kuwei" disabled="disabled">
 		                </div>
 		            </div>
 		        </li>
@@ -159,7 +159,7 @@
 		                    批号：
 		                </div>
 		                <div class="aui-list-item-input">
-		                    <input type="text" placeholder="不限" disabled="disabled">
+		                    <input type="text" placeholder="不限" name="pihao" disabled="disabled">
 		                </div>
 		            </div>
 		        </li>
@@ -169,7 +169,7 @@
 		                    单位：
 		                </div>
 		                <div class="aui-list-item-input">
-		                    <input type="text" placeholder="不限" disabled="disabled">
+		                    <input type="text" placeholder="不限" name="danwei" disabled="disabled">
 		                </div>
 		            </div>
 		        </li>
@@ -179,7 +179,7 @@
 		                    单据编号：
 		                </div>
 		                <div class="aui-list-item-input">
-		                    <input type="text" placeholder="不限" disabled="disabled">
+		                    <input type="text" placeholder="不限" name="danjubianhao" disabled="disabled">
 		                </div>
 		            </div>
 		        </li>
@@ -272,6 +272,7 @@ apiready = function () {
         color: "#33475f"
     });   
 
+    //监听返回键
     api.addEventListener({
     	name: 'keyback'
 	}, function(ret, err){
@@ -292,6 +293,23 @@ apiready = function () {
 	        }
 	    }else{
 	         alert( JSON.stringify( err ) );
+	    }
+	});
+
+	//监听筛选条件
+	api.addEventListener({
+	    name: 'filter_save'
+	}, function(ret, err) {
+	    if (ret) {
+	     	for(var key in ret.value){
+	     		if(key !== 'time1' && key !== 'time2'){
+	     			$('input[name='+key+']').val(ret.value[key]);
+	     		}else{
+	     			$('input[name=time]').val(ret.value['time1']+'至'+ret.value['time2']);
+	     		}
+	     	}
+	    } else {
+	        alert(JSON.stringify(err));
 	    }
 	});
 
