@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>主页面</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" href="../css/aui.2.0.css">
+    <link rel="stylesheet" href="../css/zmeat.css">
+    <style>
+        html,body{
+            font-family: "微软雅黑";
+        }
+        .aui-grid [class*=aui-col-] { border: solid .05rem #f5f5f5; }
+
+        /* .select_box {
+            display: block;
+            width: 100%;
+            height: 45px;
+            position: relative;
+            background: #fff;
+            margin-bottom:  .1rem;
+        }
+        .select_box span {
+            display: inherit;
+            width: 90px;
+            height: 35px;
+            float: right;
+            position: absolute;
+            top: 2px;
+            right: 25px;
+            vertical-align: middle;
+            line-height: 2.3;
+            font-family: "微软雅黑";
+            font-size: 18px;
+        } */
+        /* .data_box {
+            width: 100%;
+            background: #fff;
+            margin-bottom: 12px;
+        }
+        .data_box table {
+            width: 100%;
+        }
+        .data_box table td .first{
+            padding: 5px 7px 2px 25px;
+        }
+        .data_box table td {
+            height: 35px;
+        } */
+        .select_pull {
+            background: url('../image/jiaobiao.png') no-repeat;
+            background-size: 16px;
+            background-position: right bottom;
+        }
+        .select_pull:active{
+            background-color: rgba(0,0,0,0.1);
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- <div class="select_box"><span class="select_pull">所有仓库</span></div>
+    <div class="data_box">
+        <table>
+            <tr>
+                <td><span class="first">今日入库：</span><span class="second">0</span></td>
+                <td><span class="first">今日出库：</span><span class="second">0</span></td>
+            </tr>
+            <tr>
+                <td><span class="first">库存不足：</span><span class="second">0</span></td>
+                <td><span class="first">库存过多：</span><span class="second">0</span></td>
+            </tr>
+        </table>
+    </div> -->
+
+    <section class="aui-grid aui-margin-b-15">
+        <div class="aui-row">
+            <div class="aui-col-xs-4" tapmode='hover' onclick="openWin('addtion_goods', './addtion_goods.html')">
+                <i class="zmeat-iconfont zmeat-icon-11"></i>
+                <div class="aui-grid-label">新增货品</div>
+            </div>
+            <div class="aui-col-xs-4" tapmode='hover' onclick="openWin('goods_info', './goods_info.html')">
+                <i class="zmeat-iconfont zmeat-icon-5"></i>
+                <div class="aui-grid-label">货品管理</div>
+            </div>
+            <div class="aui-col-xs-4" tapmode='hover' onclick="openWin('latest_addtion', './latest_addtion.html')">
+                <i class="zmeat-iconfont zmeat-icon-7"></i>
+                <div class="aui-grid-label">新增入库</div>
+            </div>
+            <div class="aui-col-xs-4" tapmode='hover' onclick="openWin('latest_exit', './latest_exit.html')">
+                <i class="zmeat-iconfont zmeat-icon-3"></i>
+                <div class="aui-grid-label">新增出库</div>
+            </div>
+            <div class="aui-col-xs-4" tapmode='hover' onclick="openWin('addtion_check', './addtion_check.html')">
+                <i class="zmeat-iconfont zmeat-icon-9"></i>
+                <div class="aui-grid-label">新增盘点</div>
+            </div>
+            <div class="aui-col-xs-4">
+                <i class="zmeat-iconfont zmeat-icon-10"></i>
+                <div class="aui-grid-label">新增调拨</div>
+            </div>
+            <div class="aui-col-xs-4" tapmode onclick="openWin('warehouse_detail','./warehouse_detail.html')">
+                <i class="zmeat-iconfont zmeat-icon-8"></i>
+                <div class="aui-grid-label">库存明细</div>
+            </div>
+            <div class="aui-col-xs-4">
+                <i class="zmeat-iconfont zmeat-icon-6"></i>
+                <div class="aui-grid-label">本地单据</div>
+            </div>
+            <div class="aui-col-xs-4">
+                <i class="zmeat-iconfont zmeat-icon-4"></i>
+                <div class="aui-grid-label">服务端单据</div>
+            </div>
+        </div>
+    </section>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+<script type="text/javascript" src="../script/touch.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+
+<script type="text/javascript">
+    apiready = function(){
+        $('.select_pull').tap(function(){
+            var selects = ['所有仓库','测试仓库'];
+
+            api.actionSheet({
+                cancelTitle: '取消',
+                buttons: selects
+            }, function(ret, err){
+                if( ret ){
+                     $('.select_pull').html(selects[ret.buttonIndex-1]);
+                }else{
+                     alert( JSON.stringify( err ) );
+                }
+            });
+        });
+
+    };
+</script>
+</body>
+</html>

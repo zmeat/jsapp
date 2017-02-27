@@ -1,0 +1,57 @@
+@font-face {
+	font-family: "zmeat";
+	src: url("./fonts/zmeat.ttf") format('truetype');
+}
+.zmeat-iconfont {
+	position: relative;
+	font-family:"zmeat" !important;
+	font-size: 1.8rem;
+	font-style:normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.zmeat-icon-0:before {
+	content: '\e900';
+}
+.zmeat-icon-1:before {
+	content: '\e901';
+}
+.zmeat-icon-2:before {
+	content: '\e902';
+}
+.zmeat-icon-3:before {
+	content: '\e903';
+	color: #ea8010;
+}
+.zmeat-icon-4:before {
+	content: '\e904';
+	color: #11cd6e;
+}
+.zmeat-icon-5:before {
+	content: '\e905';
+	color: #f4c600;
+}
+.zmeat-icon-6:before {
+	content: '\e906';
+	color: #ba3514;
+}
+.zmeat-icon-7:before {
+	content: '\e907';
+	color: #56abe4;
+}
+.zmeat-icon-8:before {
+	content: '\e908';
+	color: #11cd6e;
+}
+.zmeat-icon-9:before {
+	content: '\e909';
+	color: #11cd6e;
+}
+.zmeat-icon-10:before {
+	content: '\e90a';
+	color: #eb4f38;
+}
+.zmeat-icon-11:before {
+	content: '\e90b';
+	color: #f4c600;
+}

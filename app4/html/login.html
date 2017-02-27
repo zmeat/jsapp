@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/aui.2.0.css">
+    <style>
+        body {
+            height: 100%;
+            width: auto;
+            background: url(../image/background.jpg) no-repeat;
+            background-size: 100% 100%;
+            background-position: center center;
+        }
+        .content_box{
+            width: 100%;
+            position: absolute;
+            top: 27%;
+        }
+        .form_box {
+            display: block;
+            width: 85%;
+            background: #33475f;
+            opacity: 0.5;
+            margin: 0px auto;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 900;
+        }
+        .form_box ul li:not(:first-child) {
+            border-top: .05rem solid #fff;
+            border-collapse: thin;
+        }
+        .button_box {
+            display: block;
+            width: 85%;
+            margin: 25px auto;
+        }
+        .btn-height {
+            padding: 3px 0px !important;
+            margin-top: 15px;
+        }
+        .form_box li input {
+            padding: 0px 40px;
+            font-weight: initial;
+            color: #fff;
+        }
+        .form_box li {
+            position: relative;
+        }
+        .form_box li i {
+            position: absolute;
+            left: 5px;
+            top: 8px;
+
+        }
+        .form_box li span {
+            position: absolute;
+            right: 12px;
+            top: 8px;
+        }
+        .aui-iconfont {
+            font-size: 0.9rem;
+        }
+        ::-webkit-input-placeholder{color:#fff;}
+        ::-moz-placeholder{color:#fff;}
+    </style>
+</head>
+<body>
+    <div class="content_box">
+        <div class="form_box">
+            <ul>
+                <li><i class="aui-iconfont aui-icon-menu"></i><input type="text" placeholder="请选择服务器" disabled><span class="aui-iconfont aui-icon-down"></span></li>
+                <li><i class="aui-iconfont aui-icon-my"></i><input type="text" placeholder="请输入用户名"><span class="aui-iconfont aui-icon-down"></span></li>
+                <li><i class="aui-iconfont aui-icon-lock"></i><input type="password" placeholder="请输入密码"><span class="aui-iconfont aui-icon-display"></span></li>
+            </ul>
+        </div>
+        <div class="button_box">
+            <button class="aui-btn aui-btn-warning aui-btn-block btn-height" tapmode onclick="login()">登录</button>
+            <button class="aui-btn aui-btn-light aui-btn-block btn-height" style="background:#fff; border: .05rem solid #f4c600;" onclick="openWin('register', './register.html')">注册</button>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+<script type="text/javascript" src="../script/touch.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+
+<script type="text/javascript">
+apiready = function(){
+    $api.fixStatusBar( $api.dom('header') );
+    api.setStatusBarStyle({
+        style: 'dark',
+        color: "#33475f"
+    });
+
+
+    //监听返回键
+    api.addEventListener({
+        name: 'keyback'
+    }, function(ret, err){
+        return false;
+    }); 
+};
+
+function login(){
+    $api.setStorage('token', {uid: '1', username: 'zjw'});
+
+    openWin('root', '../index.html');
+}
+</script>
+</html>

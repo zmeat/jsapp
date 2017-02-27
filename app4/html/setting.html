@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>设置</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/aui.2.0.css">
+    <style>
+        html,body{
+            width:  100%;
+            height:  100%;
+        }
+        .user-info-box {
+            width: 100%;
+            display: flex;
+            display: -webkit-flex;
+            flex-direction: row;
+            -webkit-flex-direction:  row;
+            background: #fff;
+            padding: 15px 5px;
+        }
+        .icon-box,.logout-box{
+            display: inline-block;
+            width: 80px;
+            height: 100%;
+            margin: auto 0px;
+        }
+        .icon-box img {
+            display: block;
+            width: 100%;
+            border-radius: 50%;
+            padding: 8px;
+        }
+        .msg-box {
+            flex:  1;
+            padding-left:  15px;
+        }
+        .msg-box div{
+            display: block;
+            width: 180px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .msg-box .nick {
+            font-size: 20px;
+            font-family: '黑体'
+        }
+        .msg-box .username,.address {
+            font-size: 14px;
+            font-family: '微软雅黑';
+            color: #a9b7b7;
+        }
+        .logout-box span{
+            display: inline-block;
+            width:  85%;
+            height: 35px;
+            border: 1px solid #ffc107;
+            border-radius: 4px;
+            color:  #ffc107;
+            text-align: center;
+            font-size: 16px;
+            font-family: "微软雅黑";
+            line-height: 2
+        }
+
+        .setting-box {
+            display: block;
+            width:  100%;
+            margin-top: 10px;
+        }
+        .setting-box ul li {
+            height: 55px;
+            font-size: 18px;
+        }
+        .aui-iconfont {
+            font-size: 18px !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="user-info-box">
+        <div class="icon-box">
+            <img src="../image/user-default.png" />
+        </div>
+        <div class="msg-box">
+            <div class="nick">往世风云</div>
+            <div class="username">用户名：admin</div>
+            <div class="address">地址：www.baidu.com</div>
+        </div>
+        <div class="logout-box">
+            <span>注销</span>
+        </div>
+    </div>
+
+    <div class="setting-box">
+        <div class="aui-content aui-margin-b-15">
+            <ul class="aui-list aui-list-in">
+                <li class="aui-list-item" tapmode onclick="openWin('reset_password', './reset_password.html')">
+                    <div class="aui-list-item-label-icon">
+                        <i class="aui-iconfont aui-icon-home"></i>
+                    </div>
+                    <div class="aui-list-item-inner aui-list-item-arrow">
+                        密码修改
+                    </div>
+                </li>
+                <li class="aui-list-item" tapmode onclick="openWin('params_setting', './params_setting.html')">
+                    <div class="aui-list-item-label-icon">
+                        <i class="aui-iconfont aui-icon-edit"></i>
+                    </div>
+                    <div class="aui-list-item-inner aui-list-item-arrow">
+                        参数设置
+                    </div>
+                </li>
+                <li class="aui-list-item" tapmode onclick="openWin('DS', './DS.html')">
+                    <div class="aui-list-item-label-icon">
+                        <i class="aui-iconfont aui-icon-camera"></i>
+                    </div>
+                    <div class="aui-list-item-inner aui-list-item-arrow">
+                        数据同步
+                    </div>
+                </li>
+                <li class="aui-list-item" tapmode onclick="openWin('manage_tool', './manage_tool.html')">
+                    <div class="aui-list-item-label-icon">
+                        <i class="aui-iconfont aui-icon-edit"></i>
+                    </div>
+                    <div class="aui-list-item-inner aui-list-item-arrow">
+                        管理工具
+                    </div>
+                </li>
+                <li class="aui-list-item" tapmode onclick="openWin('about', './about.html')">
+                    <div class="aui-list-item-label-icon">
+                        <i class="aui-iconfont aui-icon-camera"></i>
+                    </div>
+                    <div class="aui-list-item-inner aui-list-item-arrow">
+                        关于
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+<script type="text/javascript" src="../script/touch.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+apiready = function(){
+    $api.fixStatusBar( $api.dom('header') );
+    api.setStatusBarStyle({
+        style: 'dark',
+        color: "#33475f"
+    });       
+};
+
+</script>
+</html>

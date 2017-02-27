@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>筛选条件</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/aui.2.0.css">
+    <style>
+    html,body{
+    	width: 100%;
+    	height: 100%;
+    }
+    .aui-btn {
+    	width: 40%;
+    	display: inline-block;
+    }
+    .btn-box {
+    	width: 100%;
+
+    	text-align: center;
+    }
+    </style>
+</head>
+<body>
+	<div id="mask" style="position:fixed;width:100%;height:100%;z-index:2;background:rgba(0,0,0,0.4);" hidden></div>
+
+    <header class="aui-bar aui-bar-nav" style="background: #ffc107">
+        <a class="aui-pull-left aui-btn" tapmode onclick="closeWin('warehouse_filter')">
+            <span class="aui-iconfont aui-icon-left"></span>
+        </a>
+        <div class="aui-title">筛选条件</div>
+        <a class="aui-pull-right aui-btn">
+            <span class="aui-iconfont"></span>
+        </a>
+    </header>
+
+
+	<div class="aui-content aui-margin-b-15 show-selection">
+	    <ul class="aui-list aui-form-list">
+	    	<li class="aui-list-item">
+	            <div class="aui-list-item-inner">
+	                <div class="aui-list-item-label" style="font-size:12px;width:45%;">
+	                    开始日期：&nbsp;
+	                </div>
+	                <div class="aui-list-item-input"  tapmode onclick="openDatePicker()">
+	                    <input type="text" value="0000-00-00" disabled="disabled" style="color:#ffc107;font-weight:600;">
+	                </div>
+	                <div class="aui-list-item-label" style="font-size:12px;width:45%;">
+	                    截至日期：&nbsp;
+	                </div>
+	                <div class="aui-list-item-input"  tapmode onclick="openDatePicker()">
+	                    <input type="text" value="0000-00-00" disabled="disabled" style="color:#ffc107;font-weight:600;">
+	                </div>
+	            </div>
+	        </li>
+	        <li class="aui-list-item">
+	            <div class="aui-list-item-inner aui-list-item-arrow">
+	                <div class="aui-list-item-label">
+	                    所在仓库
+	                </div>
+	                <div class="aui-list-item-input">
+	                    <input type="text" placeholder="请选择" disabled="disabled">
+	                </div>
+	            </div>
+	        </li>
+	        <li class="aui-list-item">
+	            <div class="aui-list-item-inner aui-list-item-arrow">
+	                <div class="aui-list-item-label">
+	                    往来单位
+	                </div>
+	                <div class="aui-list-item-input">
+	                    <input type="password" placeholder="请选择" disabled="disabled">
+	                </div>
+	            </div>
+	        </li>
+	        <li class="aui-list-item">
+	            <div class="aui-list-item-inner">
+	                <div class="aui-list-item-label">
+	                    单据编号
+	                </div>
+	                <div class="aui-list-item-input">
+	                    <input type="text" placeholder="请输入编号">
+	                </div>
+	            </div>
+	        </li>
+	        <li class="aui-list-item">
+	            <div class="aui-list-item-inner">
+	                <div class="aui-list-item-input">
+	                    <label><input class="aui-radio" type="checkbox" name="in"> 入库明细</label>
+	                    <label><input class="aui-radio" type="checkbox" name="out"> 出库明细</label>
+	                    <label><input class="aui-radio" type="checkbox" name="detail"> 盘点明细</label>
+	                </div>
+	            </div>
+	        </li>
+	    </ul>
+	</div>
+
+	<div class="btn-box">
+	  	<div class="aui-btn aui-btn-block" style="background: #fff;">重置</div>
+   		<div class="aui-btn aui-btn-block aui-btn-warning">确定</div>	
+	</div>
+
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+<script type="text/javascript" src="../script/touch.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+apiready = function () {
+    $api.fixStatusBar( $api.dom('header') );
+    api.setStatusBarStyle({
+        style: 'dark',
+        color: "#33475f"
+    });   
+}
+
+function openDatePicker(){
+	var UICalendar = api.require('UICalendar');
+
+	$('#mask').removeAttr("hidden");
+	
+	UICalendar.open({
+	    rect: {
+	        x: 30,
+	        y: api.frameHeight / 2 - 170,
+	        w: api.frameWidth - 60,
+	        h: 340
+	    },
+	    styles: {
+	        bg: '#fff',
+	        week: {
+	            weekdayColor: '#3b3b3b',
+	            weekendColor: '#a8d400',
+	            size: 12
+	        },
+	        date: {
+	            color: '#3b3b3b',
+	            selectedColor: '#fff',
+	            selectedBg: '#a8d500',
+	            size: 12
+	        },
+	        today: {
+	            color: 'rgb(230,46,37)',
+	            bg: ''
+	        },
+	        specialDate: {
+	            color: '#a8d500'
+	        }
+	    },
+	    specialDate: [{
+	        date: '2015-06-01'
+	    }],
+	    switchMode: 'vertical',
+	    fixedOn: api.frameName,
+	    fixed: false
+	}, function(ret, err) {
+	    if (ret) {
+	    	if(ret.eventType === 'normal'){
+	   	        UICalendar.close();
+	       		$('#mask').attr("hidden", ''); 		
+	    	}
+	    } else {
+	        alert(err);
+	    }
+	});
+}
+</script>
+</html>
